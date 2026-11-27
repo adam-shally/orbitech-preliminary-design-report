@@ -1,0 +1,75 @@
+%% !TEX program = lualatex
+%% !TEX encoding = UTF-8 Unicode
+%% =====================================================================
+%%  main.tex -- Preliminary Design Report, OrbiTech, Project 5 (IAI)
+%%  Seminar 5523001 (Dr. Yoram Segal).  Thin driver: all design code is in
+%%  template.cls, every chapter is a file in chapters/.
+%%
+%%  Engine        : LuaLaTeX      Bibliography : biblatex + Biber (IEEE)
+%%  Build (four runs):
+%%      lualatex -interaction=nonstopmode main.tex
+%%      biber main
+%%      lualatex -interaction=nonstopmode main.tex
+%%      lualatex -interaction=nonstopmode main.tex
+%%  Success = "Output written on main.pdf" and no line starting with '!' in main.log.
+%%
+%%  Folder layout
+%%      main.tex  template.cls  references.bib  coverpage.tex  frontmatter.tex
+%%      draftpages.tex  chapters/ch1..ch9  figures/  logos/
+%%  Class option  [draft]  shows guide boxes, page-budget notes and draft pages;
+%%                [final]  (default) is the submission PDF.
+%% =====================================================================
+\documentclass[final]{template}
+
+%% ------------------------------------------------------------------
+%%  SWITCHES
+%% ------------------------------------------------------------------
+\newcommand{\SolutionPlacement}{afterproblem}  % afterproblem (L05, Fig.7) | afteralternatives
+\newcommand{\FrontOrder}{abstractfirst}        % abstractfirst: abstract = i, contents = ii | tocfirst
+\newcommand{\FrontNumbering}{roman}
+
+%% ------------------------------------------------------------------
+%%  PROJECT DATA
+%% ------------------------------------------------------------------
+\newcommand{\ProjectTitleHe}{כלי הדרכה מחומרים פנימיים}
+\newcommand{\ProjectTitleEn}{\latin{Training from Internal Materials: Grounded RAG and Interactive 3D Knowledge Training}}
+\newcommand{\ProjectShortTitle}{כלי הדרכה מחומרים פנימיים}
+\newcommand{\StudentOne}{אדם שלה}
+\newcommand{\StudentTwo}{נכלה חדאד}
+\newcommand{\AdvisorName}{ד"ר יורם סגל}
+\newcommand{\IAIContact}{מר מרום לוין, ראש צוות מערכות מידע תפעוליות}
+\newcommand{\ReportDate}{25-11-2026}
+\newcommand{\ConsultingFirm}{\latin{OrbiTech}}
+\newcommand{\ProjectNumber}{\latin{5}}
+%% Submission details: leave empty to print nothing, or fill in, e.g.
+%%   \newcommand{\StudentOneID}{123456789}  \newcommand{\StudentOneMail}{name@biu.ac.il}
+\newcommand{\StudentOneID}{}   \newcommand{\StudentOneMail}{adamshally0@gmail.com}
+\newcommand{\StudentTwoID}{}   \newcommand{\StudentTwoMail}{NakhlaHaddad.official@gmail.com}
+\newcommand{\GroupID}{}        % 8 characters, English, no spaces (Moodle form)
+\newcommand{\GitHubRepo}{}     % shared GitHub repository link
+
+\begin{document}
+\pagenumbering{roman}
+\input{coverpage}
+\input{frontmatter}
+\pagenumbering{arabic}
+
+\input{chapters/ch1-intro}
+\input{chapters/ch2-problem}              % ends with \pcIfSolution{afterproblem}  -> chapters/ch3-solution
+\input{chapters/ch4-literature}
+\input{chapters/ch5-market}
+\input{chapters/ch6-design}               % ends with \pcIfSolution{afteralternatives}
+\input{chapters/ch7-plan}
+\input{chapters/ch8-risk}
+\input{chapters/ch9-summary}
+
+%% ---------------------------------------------------------------------
+%%  BIBLIOGRAPHY (IEEE, references.bib)
+%% ---------------------------------------------------------------------
+\begin{english}
+\printbibliography[heading=pcbib,title={מקורות}]
+\end{english}
+\BudgetEnd{bib}
+
+\ifpcdraft\input{draftpages}\fi
+\end{document}

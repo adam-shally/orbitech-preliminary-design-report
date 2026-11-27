@@ -1,0 +1,298 @@
+%% =====================================================================
+%%  CHAPTER 6: DESIGN ALTERNATIVES, SELECTION, INNOVATION   (budget 8 pages)
+%%  chapters/ch6-design.tex
+%%  Every Pugh score c_ij is derived from an engineering metric (rules in
+%%  Table 6.3); model parameters are labelled as planning assumptions.
+%% =====================================================================
+\pcChapter{alt}{8}{חלופות תכן, בחירת פתרון וחדשנות}
+\begin{pcguide}[מה כותבים כאן]
+\latin{2}--\latin{3} חלופות תכן והשוואה מנומקת, כדי שהבחירה תהיה מוצדקת. אפשר לשלב שני פתרונות קיימים;
+אפשר לכלול פתרון יקר או לא זמין. סמנו איזו חלופה היא הפתרון המוצע בפרק~\ref{ch:solution}.
+תקציב: \latin{2.5} + \latin{2} + \latin{2.5} + \latin{1} עמודים לפי הסעיפים.
+\end{pcguide}
+
+\section{חלופות תכן}\label{sec:alts}
+נבחנו שלוש חלופות שונות עקרונית (טבלה~\ref{tab:alts}). \textbf{חלופה א --- בסיס ידני:} ראיונות מומחים, קובצי
+\latin{Word/Excel/PowerPoint}, חפיפה אישית ובחינה ידנית. \textbf{חלופה ב --- מאגר \latin{LMS} וחיפוש מילולי:} תיעוד דיגיטלי
+מרכזי וחיפוש מילולי \latin{(BM25)}, סרטונים ומבחנים שכותב מדריך, ללא הפקה מבוססת \latin{RAG}. \textbf{חלופה ג --- \latin{OrbiTech}:}
+קליטת מסמכים ולקחים, אחזור היברידי מבוסס הרשאות, מודל שפה מקומי להפקת טיוטות, שרשרת מקורות, אישור מומחה, מבחנים ותבניות
+\threeD{} פרמטריות שמאוכלסות מתצורות \latin{JSON} שנוצרות אוטומטית; מסלול \twoD{} חלופי משמש לנגישות ולהשוואה.
+\begin{table}[!htbp]
+\centering
+\caption{השוואת חלופות התכן}\label{tab:alts}
+\begin{pctable}{H{0.22},H{0.26},H{0.26},H{0.26}}
+  \pchead{היבט & חלופה א: ידני & חלופה ב: \latin{LMS} וחיפוש & חלופה ג: \latin{OrbiTech}}
+  \pcrow{עיקרון פעולה & ראיונות, קבצים משרדיים וחפיפה אישית & מאגר דיגיטלי, חיפוש מילולי, סרטונים ומבחנים ידניים & \latin{Grounded RAG} מקומי, אישור מומחה ותרגול \latin{3D} מתצורת \latin{JSON}}
+  \pcrow{מקום פריסה ותלות חיצונית & מקומי; ללא תלות & מקומי או שירות ענן, לפי המערכת & מקומי ומבודד; ללא רשת יוצאת}
+  \pcrow{יתרונות & סיכון טכנולוגי נמוך; שליטה אנושית באישור & פשטות וניהול למידה; מסייע לניהול גרסאות & הפקה מהירה, עקיבות למקור, עדכון אוטומטי ומדידת כשירות}
+  \pcrow{חסרונות ומגבלות & זמן הכנה ארוך; מעקב גרסאות ידני & עומס יצירת התוכן נשאר על המדריך & מורכבות הטמעה, צורך ב-\latin{GPU}; עמידה באבטחה טרם הוכחה}
+  \pcrow{עלות ומורכבות & שעות מומחה ומדריך & רישוי ותחזוקת מאגר & תשתית \latin{GPU}, זמן מומחה לאישור ותחזוקה}
+  \pcrow{קשר לפתרון המוצע (פרק~\ref{ch:solution}) & בסיס ההשוואה ב-\hyp{2} & בסיס עקרוני לניהול למידה & \textbf{החלופה הנבחרת}}
+\end{pctable}
+\end{table}
+
+\section{מטריצת החלטה משוקללת (\latin{Pugh})}\label{sec:pugh}
+סכום הניקוד המשוקלל של חלופה \mth{j} מחושב לפי
+\begin{equation}
+  S_j=\sum_{i=1}^{n} w_i\, c_{ij},\qquad \sum_{i=1}^{n} w_i = 1,
+\end{equation}
+כאשר \mth{w_i} הוא משקל הקריטריון \mth{i} ו-\mth{c_{ij}} הציון של חלופה \mth{j} בסולם \rng{1}{5} (גבוה עדיף). כדי שהציונים לא
+יהיו הערכות שרירותיות, כל \mth{c_{ij}} נגזר ממדד הנדסי מוגדר בכלל המרה קבוע מראש (טבלה~\ref{tab:rules}), ומהערך המחושב של המדד
+במודל הנדסי שפרמטריו מפורטים בהמשך. פרמטרי המודל הם \textbf{הנחות תכנון} שיימדדו בפיילוט (\latin{D4} ושבוע \latin{5}), ולא
+תוצאות; טבלה~\ref{tab:pugh} מציגה לכל תא את ערך המדד ואת הציון שנגזר ממנו.
+\begin{table}[!htbp]
+\centering
+\caption{מטריצת החלטה משוקללת: ערך המדד ההנדסי \mth{\rightarrow} הציון \mth{c_{ij}}; סכום המשקלים \latin{1}}\label{tab:pugh}
+\pughReset
+\begin{pctable}{H{0.33},C{0.09},C{0.19},C{0.19},C{0.20}}
+  \pchead{קריטריון (מדד) & משקל \mth{w_i} & חלופה א & חלופה ב & חלופה ג}
+  \pughRowEv{חשיפה להזיה: שיעור טענות לא נתמכות (\latin{\%})}{0.20}{5}{0}{5}{0}{4}{2.4}
+  \pughRowEv{אבטחה ושליטה מקומית: בקשות לרשת חוץ}{0.20}{5}{0}{3}{SaaS}{4}{0 (design)}
+  \pughRowEv{מאמץ הפקה יחסי \mth{E} (ידני \mth{=1}) }{0.15}{2}{1.00}{3}{0.82}{4}{0.52}
+  \pughRowEv{נטל תשתית: \latin{VRAM} (\latin{GB})}{0.15}{5}{0}{4}{0}{3}{9.4}
+  \pughRowEv{זמן הפצת עדכון גרסה \mth{T_{upd}} (שעות)}{0.10}{2}{24}{3}{16}{5}{1}
+  \pughRowEv{ערוצי העברת ידע נתמכים (\latin{0}--\latin{3})}{0.20}{3}{2}{2}{1}{4}{3}
+  \pughTotalsAbs
+\end{pctable}
+\pughCheck
+\end{table}
+\begin{table}[!htbp]
+\centering
+\caption{כללי ההמרה ממדד הנדסי לציון, ונימוק המשקולות}\label{tab:rules}
+\begin{pctable}{H{0.22},C{0.08},H{0.28},H{0.20},H{0.22}}
+  \pchead{קריטריון & \mth{w_i} & סף לציונים \latin{5/4/3/2/1} & מקור המדד & נימוק המשקל}
+  \pcrow{חשיפה להזיה & \num{0.20} & \latin{$\le$1 / $\le$5 / $\le$10 / $\le$20 / $>$20 (\%)} & מודל שכבות בקרה (להלן) \cite{ji2023survey,barnett2024seven} & פלט לא מעוגן הוא הסיכון החמור ביותר (\risk{03}); \req{03}}
+  \pcrow{אבטחה ושליטה מקומית & \num{0.20} & \latin{0} מאומת / \latin{0} בתכן / אחסון עצמי / \latin{SaaS} בלבד / ענן & \req{09}, \req{10} \cite{zeng2024good} & סביבה ביטחונית-תעשייתית}
+  \pcrow{מאמץ הפקה \mth{E} & \num{0.15} & \latin{$\le$0.5 / $\le$0.7 / $\le$0.9 / $\le$1.0 / $>$1.0} & מודל מאמץ (להלן); יעד \req{04} & רכיב \mth{T_{prep}}, \hyp{2}}
+  \pcrow{נטל תשתית (\latin{VRAM}) & \num{0.15} & ללא \latin{GPU} / ללא \latin{GPU}, שילוב / \latin{$\le$16 / $\le$24 / $>$24 (GB)} & חישוב זיכרון (להלן) & צוות של שניים, \latin{14} שבועות (טבלה~\ref{tab:constraints})}
+  \pcrow{הפצת עדכון \mth{T_{upd}} & \num{0.10} & \latin{$\le$2 / $\le$8 / $\le$16 / $\le$40 / $>$40 (h)} & יעד \req{11}: עד יום עבודה & ערבוב גרסאות \cite{zheng2025knowshift}}
+  \pcrow{ערוצי העברת ידע & \num{0.20} & \latin{3} מאומת / \latin{3 / 2 / 1 / 0} & מסמך, ראיון סמוי, תרגול החלטה \cite{bodding2025mr} & רכיבי שאלת המחקר: \req{16}, \hyp{4}}
+\end{pctable}
+\end{table}
+\textbf{מודל החשיפה להזיה.} הזיה נשארת בתוצר המאושר רק אם עברה שלוש שכבות בקרה: מודל השפה מייצר שיעור גולמי \mth{U_{gen}} של טענות
+לא נתמכות; מנגנון ההימנעות והאימות מסנן חלק \mth{d_{abs}} מהן; ומומחה מזהה חלק \mth{d_{SME}} מהשאר:
+\begin{equation}
+  U_{final}=U_{gen}\,(1-d_{abs})\,(1-d_{SME})=0.20\times0.60\times0.20=0.024\ (2.4\%).
+\end{equation}
+הערכים \mth{U_{gen}=20\%}, \mth{d_{abs}=40\%} ו-\mth{d_{SME}=80\%} הם הנחות תכנון; אם יעילות המומחה תרד ל-\pct{50}, \mth{U_{final}}
+יעלה ל-\pct{6} והציון ירד ל-\latin{3}. בחלופות א ו-ב אין שלב יצירה, ולכן אין הזיה, אך נשאר סיכון לטעות אנוש שאינו נמדד. \textbf{מודל
+המאמץ.} המאמץ ליחידה מאושרת הוא \mth{E=\sum_k s_k(1-\Delta_k)}, כאשר \mth{s_k} חלק השלב בבסיס הידני (איסוף \mth{0.30},
+כתיבה \mth{0.50}, בקרה \mth{0.20}; הנחה שתיבדק ב-\latin{D4}) ו-\mth{\Delta_k} השינוי היחסי בשלב. בחלופה ב החיפוש מקצר את האיסוף ב-\pct{60}:
+\mth{E_B=0.12+0.50+0.20=0.82}. בחלופה ג הטיוטה מקצרת את הכתיבה ב-\pct{80}, והבקרה מתארכת ב-\pct{50} משום שהמומחה בודק
+ציטוטים: \mth{E_C=0.12+0.10+0.30=0.52}, כלומר קרוב ליעד \req{04} (\mth{\le0.50}) אך מעליו --- היעד הדוק, ויבדק בפיילוט.
+\begin{figure}[!htbp]
+\centering
+\pcFig{pugh_bar}{%
+\pcAutoFit{\begin{pctikz}
+\begin{axis}[ybar stacked,width=10.5cm,height=6.2cm,symbolic x coords={A,B,C},xtick=data,
+  xticklabels={\tn{חלופה א},\tn{חלופה ב},\tn{חלופה ג}},ymin=0,ymax=4.6,bar width=24pt,
+  ymajorgrids,ylabel={\tn{ניקוד משוקלל}},enlarge x limits=0.25,
+  legend style={at={(0.5,-0.18)},anchor=north,legend columns=2,font=\scriptsize,draw=none},
+  cycle list={{fill=pcPrimary,draw=white},{fill=pcGood,draw=white},{fill=pcWarn,draw=white},{fill=pcBad,draw=white},{fill=pcGrey,draw=white},{fill=pcDark,draw=white}}]
+\pughSeries
+\end{axis}
+\end{pctikz}}}
+\caption{פירוק הניקוד המשוקלל של כל חלופה לתרומות הקריטריונים (מחושב מטבלה~\ref{tab:pugh}; ערכי המדדים הם פרמטרי תכנון)}\label{fig:pughbar}
+\end{figure}
+\textbf{ניתוח רגישות.} משנים משקל של קריטריון אחד, \mth{w_k \rightarrow w_k'}, ומנרמלים את האחרים כך שהסכום יישאר \latin{1}:
+\begin{equation}
+  w_i' = w_i\,\frac{1-w_k'}{1-w_k}\quad (i\neq k),\qquad S_j' = \sum_{i} w_i'\, c_{ij}.
+\end{equation}
+טבלה~\ref{tab:sens} מראה את התוצאה. הבחירה בחלופה ג יציבה כשהמשקל הגדול הוא על מאמץ ההפקה, על העברת הידע או על משקולות שוות, אך
+לא כשהמשקל הגדול הוא על נאמנות, אבטחה או קלות הטמעה: אז החלופה הידנית עולה לראש. נקודות המעבר: חלופה א עוקפת את ג אם
+\mth{w_1\ge0.275} (נאמנות), \mth{w_2\ge0.275} (אבטחה) או \mth{w_4\ge0.195} (נטל תשתית, לעומת \mth{0.15} בבסיס). זו תוצאה הגיונית
+ולא פגם: חלופה ג נבחרת משום שהיא משרתת את מטרות הפרויקט (מאמץ הפקה, עדכון והעברת ידע), ובמחיר סיכון ותשתית שהפיילוט נועד לבדוק.
+\begin{table}[!htbp]
+\centering
+\caption{ניתוח רגישות: האם הבחירה יציבה לשינוי משקולות?}\label{tab:sens}
+\begin{pctable}{H{0.24},C{0.26},C{0.09},C{0.09},C{0.09},C{0.14}}
+  \pchead{תרחיש (המשקל המשתנה) & \mth{(w_1,\dots,w_6)} & \mth{S_A} & \mth{S_B} & \mth{S_C} & החלופה המובילה}
+  \pcrow{בסיס & \numlist{(.20,.20,.15,.15,.10,.20)} & \num{3.85} & \num{3.35} & \num{3.95} & ג}
+  \pcrow{נאמנות דומיננטית (\mth{w_1=0.35}) & \numlist{(.35,.16,.12,.12,.08,.16)} & \num{4.07} & \num{3.66} & \num{3.96} & א}
+  \pcrow{אבטחה דומיננטית (\mth{w_2=0.35}) & \numlist{(.16,.35,.12,.12,.08,.16)} & \num{4.07} & \num{3.28} & \num{3.96} & א}
+  \pcrow{נטל תשתית דומיננטי (\mth{w_4=0.35}) & \numlist{(.15,.15,.12,.35,.08,.15)} & \num{4.12} & \num{3.50} & \num{3.73} & א}
+  \pcrow{מאמץ הפקה דומיננטי (\mth{w_3=0.30}) & \numlist{(.17,.17,.30,.12,.08,.17)} & \num{3.52} & \num{3.29} & \num{3.96} & ג}
+  \pcrow{משקולות שוות & \numlist{(.17,.17,.17,.17,.17,.17)} & \num{3.67} & \num{3.33} & \num{4.00} & ג}
+\end{pctable}
+\end{table}
+\textbf{נימוק הבחירה והשער.} הפרש של \num{0.10} בתרחיש הבסיס אינו מכריע, ולכן הבחירה בחלופה ג מותנית בשערים שנקבעו מראש: נאמנות
+מדודה של לפחות \pct{90}, אפס בקשות לרשת חוץ, וקצב יצירה העומד ביעד \req{08} (להלן). אם אחד מהם ייכשל, הפרויקט יעבור
+לגיבוי: חלופה א משופרת באחזור \latin{RAG} בלבד, כפי שמגדיר מאמר הדגל (פרק~\ref{ch:lit}) וללא שכבת ה-\latin{3D} המתקדמת.
+
+\section{ארכיטקטורת המערכת ותרשים זרימת נתונים}\label{sec:arch}
+תרשים זרימת הנתונים (איור~\ref{fig:dfd}) כולל שלוש ישויות אנושיות: מנהל ידע, מומחה תוכן מורשה ולומד. שני מאגרי נתונים מרכזיים:
+מאגר מקטעים בגרסאות, ויומן מקורות, אישורים ופעולות. מנוע ההפקה אינו רשאי לגשת למסמך שאינו מותר לתפקיד, וניהול הגרסאות מתבצע גם לפני
+ההפקה וגם במועד שליפת הפריט. פרטי הטכנולוגיה (דגם, אחזור, מסד וקטורי) מפורטים בפרק~\ref{ch:solution}; כאן מפורטים הסכמות, צינור הקליטה והגרסאות,
+תהליך האישור האנושי ומכונת המצבים של הסימולציה.
+\begin{figure}[!htbp]
+\centering
+\pcFig{dfd}{%
+\pcAutoFit{\begin{pctikz}[x=1cm,y=1cm]
+  \node[pcentity,text width=2.2cm] (e1) at (0,0) {\tn{מנהל ידע: מסמכים ולקחים מאושרים}};
+  \node[pcproc] (p1) at (-3.2,0) {\tn{\latin{1.} פענוח ואינדוקס}};
+  \node[pcproc] (p2) at (-6.4,0) {\tn{\latin{2.} אחזור \latin{RAG} והפקה עם סימוכין}};
+  \node[pcproc] (p3) at (-9.6,0) {\tn{\latin{3.} אישור מומחה \latin{(SME)}}};
+  \node[pcentity,text width=2.2cm] (e2) at (-12.8,0) {\tn{לומד: יחידה, מבחן ותרחיש \latin{3D}}};
+  \node[pcstore] (d1) at (-4.8,-3.1) {\tn{מאגר מקטעים: גרסה, עמוד, הרשאה}};
+  \node[pcstore] (d2) at (-11.2,-3.1) {\tn{יומן מקורות, אישורים ופעולות}};
+  \node[pcentity,text width=2.2cm] (e3) at (-9.6,3.0) {\tn{מומחה תוכן מורשה}};
+  \draw[pcflow] (e1) -- node[above,font=\scriptsize]{\tn{מסמכים}} (p1);
+  \draw[pcflow] (p1) -- node[above,font=\scriptsize]{\tn{שאילתה}} (p2);
+  \draw[pcflow] (p2) -- node[above,font=\scriptsize]{\tn{טיוטה}} (p3);
+  \draw[pcflow] (p3) -- node[above,font=\scriptsize]{\tn{פריט מאושר}} (e2);
+  \draw[pcflow] (p1) -- node[right,font=\scriptsize]{\tn{כתיבה}} (d1);
+  \draw[pcflow] (d1) -| node[near start,above,font=\scriptsize]{\tn{ראיות}} (p2);
+  \draw[pcflow] (p3) -- node[left,font=\scriptsize]{\tn{רישום}} (d2);
+  \draw[pcflow] (e2) |- node[near start,left,font=\scriptsize]{\tn{פעולות \latin{3D}}} (d2);
+  \draw[pcflow] ($(e3.south)+(0.35,0)$) -- node[right,font=\scriptsize]{\tn{אישור}} ($(p3.north)+(0.35,0)$);
+  \draw[pcflow] ($(p3.north)+(-0.35,0)$) -- node[left,font=\scriptsize]{\tn{לבדיקה}} ($(e3.south)+(-0.35,0)$);
+\end{pctikz}}}
+\caption{תרשים זרימת נתונים \latin{(DFD)}: מקורות מאושרים, \latin{RAG}, בקרת מומחה, תרחישי \latin{3D} ומעקב למידה}\label{fig:dfd}
+\end{figure}
+
+\subsection{סכמות הנתונים}
+הנתונים מאורגנים בחמש ישויות (טבלה~\ref{tab:schema}). המפתח \texttt{\latin{revision}} מופיע בכל ישות הנגזרת ממסמך, ולכן כל טענה, יחידה
+וצומת תרחיש ניתנים לשחזור עד גרסת המקור שלהם; \texttt{\latin{status}} קובע אם הפריט יכול להגיע ללומד.
+\begin{table}[!htbp]
+\centering
+\caption{סכמות הנתונים המרכזיות (שמות שדות באנגלית כפי שיישמרו במסד)}\label{tab:schema}
+\begin{pctable}{H{0.19},H{0.46},H{0.35}}
+  \pchead{ישות & שדות עיקריים & תפקיד}
+  \pcrow{\texttt{\latin{Document}} & \texttt{\latin{document\_id, title, owner, revision, effective\_date, sha256, access\_level, status}} & מקור וגרסה; \texttt{\latin{sha256}} מזהה שינוי בקובץ}
+  \pcrow{\texttt{\latin{Chunk}} & \texttt{\latin{chunk\_id, document\_id, revision, page, section, text, embedding\_id, valid\_from, valid\_to}} & יחידת האחזור; \texttt{\latin{valid\_to}} נסגר בעת החלפת גרסה}
+  \pcrow{\texttt{\latin{Claim}} & \texttt{\latin{claim\_id, text, chunk\_ids[], origin (document|interview), status (draft|verified|stale|rejected)}} & טענה בודדת עם עיגון; מקור הריאיון נבדק מול מקור תקף}
+  \pcrow{\texttt{\latin{Unit}} & \texttt{\latin{unit\_id, claim\_ids[], objectives[], questions[], status (draft, in\_review, approved, published, suspended), approved\_by, approved\_at}} & יחידת הדרכה ומבחן; פרסום רק במצב \texttt{\latin{approved}}}
+  \pcrow{\texttt{\latin{ScenarioConfig}} & \texttt{\latin{scenario\_id, unit\_id, template\_id, scene\_version, nodes[\{node\_id, prompt, options[], correct, evidence\_id\}]}} & תצורת \latin{JSON} שמאכלסת תבנית \latin{3D} (פרק~\ref{ch:solution})}
+  \pcrow{\texttt{\latin{EventLog}} & \texttt{\latin{scenario\_id, scene\_version, node\_id, evidence\_id, choice, is\_correct, response\_ms, timestamp, pseudo\_id}} & מדדי \hyp{4} ו-\req{14}; מזהה אקראי בלבד}
+\end{pctable}
+\end{table}
+
+\subsection{צינור הקליטה וניהול הגרסאות}
+איור~\ref{fig:pipeline} מציג את צינור הקליטה. כל קובץ שנקלט מקבל גיבוב \texttt{\latin{sha256}}; אם הגיבוב שונה מזה של הגרסה האחרונה
+נפתחת גרסה חדשה. המקטעים של הגרסה הישנה אינם נמחקים: \texttt{\latin{valid\_to}} נקבע להיום, והם מסומנים \texttt{\latin{superseded}}. טענות
+ההפניות אליהם הופכות ל-\texttt{\latin{stale}}, ויחידות המסתמכות עליהן עוברות למצב \texttt{\latin{suspended}} (\req{11}); בו בזמן נוצרת
+בקשת ייצור מחודש לתור המומחה. כך עדכון נוהל אינו דורש חיפוש ידני של כל חומר ההדרכה שהושפע ממנו.
+\begin{figure}[!htbp]
+\centering
+\pcFig{pipeline}{%
+\pcAutoFit{\begin{pctikz}[x=1cm,y=1cm]
+  \tikzset{st/.style={pcnode,text width=2.1cm,font=\scriptsize\sffamily}}
+  \node[st] (s1) at (0,0) {\tn{1. בדיקת סיווג והרשאה; חישוב \latin{sha256}}};
+  \node[st] (s2) at (-2.6,0) {\tn{2. פענוח, פירוק למקטעים (עמוד, סעיף)}};
+  \node[st] (s3) at (-5.2,0) {\tn{3. השוואה לגרסה קודמת; פתיחת גרסה}};
+  \node[st] (s4) at (-7.8,0) {\tn{4. אינדוקס: \latin{BM25} + וקטורי}};
+  \node[st] (s5) at (-10.4,0) {\tn{5. סימון \latin{stale} והשהיית יחידות תלויות}};
+  \node[st,fill=pcWarn!15,draw=pcWarn] (s6) at (-10.4,-2.0) {\tn{6. בקשת ייצור מחודש לתור המומחה}};
+  \foreach \a/\b in {s1/s2,s2/s3,s3/s4,s4/s5}{\draw[pcflow] (\a) -- (\b);}
+  \draw[pcflow] (s5) -- (s6);
+\end{pctikz}}}
+\caption{צינור הקליטה והגרסאות: שינוי גרסה משעה יחידות תלויות ופותח בקשת אישור מחודש}\label{fig:pipeline}
+\end{figure}
+
+\subsection{תהליך אישור המומחה \latin{(HITL)}}
+מצבי הפריט ומעבריהם מוצגים באיור~\ref{fig:hitl}. טיוטה נבדקת אוטומטית (עיגון והימנעות), עוברת לתור המומחה, ורק פריט שאושר מתפרסם. פריט שנדחה
+חוזר לטיוטה עם הערות, ושינוי גרסת מקור משעה פריט שפורסם ומחזיר אותו לבדיקה. קיבולת המומחה היא צוואר הבקבוק של התהליך; כדי לכמת אותה
+מדמים את התור כמערכת \latin{M/M/1} (שיטה מקורס חקר ביצועים): בקצב הגעה \mth{\lambda} יחידות לשבוע וקצב בדיקה \mth{\mu},
+\begin{equation}
+  \rho=\frac{\lambda}{\mu},\qquad W_q=\frac{\rho}{\mu-\lambda}.
+\end{equation}
+בפיילוט מתוכננות \mth{\lambda=10} יחידות לשבוע; אם המומחה בודק \mth{\mu=14} יחידות, \mth{\rho=0.71} וזמן ההמתנה הממוצע
+\mth{W_q=0.18} שבוע; ב-\mth{\mu=12} הוא עולה ל-\mth{0.42} שבוע (כיומיים), וב-\mth{\mu=11} ל-\mth{0.91} שבוע. כלומר ירידה של \pct{21} בזמינות המומחה (מ-\latin{14}
+ל-\latin{11}) מגדילה את ההמתנה פי חמישה; זהו הבסיס לסיכון זמינות המומחים (\risk{06}) ולהגבלת קצב ההפקה ל-\latin{10} יחידות
+בשבוע.
+\begin{figure}[!htbp]
+\centering
+\pcFig{hitl}{%
+\pcAutoFit{\begin{pctikz}[x=1cm,y=1cm]
+  \tikzset{ms/.style={pcnode,text width=1.9cm,font=\scriptsize\sffamily,minimum height=7mm}}
+  \node[ms] (m1) at (0,0) {\tn{טיוטה \latin{(draft)}}};
+  \node[ms] (m2) at (-2.7,0) {\tn{נבדק אוטומטית}};
+  \node[ms] (m3) at (-5.4,0) {\tn{בבדיקת מומחה \latin{(in\_review)}}};
+  \node[ms,fill=pcGood!15,draw=pcGood] (m4) at (-8.1,0) {\tn{מאושר \latin{(approved)}}};
+  \node[ms,fill=pcGood!25,draw=pcGood] (m5) at (-10.8,0) {\tn{מפורסם \latin{(published)}}};
+  \node[ms,fill=pcBad!10,draw=pcBad] (m6) at (-5.4,-1.8) {\tn{נדחה \latin{(rejected)}}};
+  \node[ms,fill=pcWarn!15,draw=pcWarn] (m7) at (-10.8,-1.8) {\tn{מושהה \latin{(suspended)}}};
+  \foreach \a/\b in {m1/m2,m2/m3,m3/m4,m4/m5}{\draw[pcflow] (\a) -- (\b);}
+  \draw[pcflow] (m3) -- (m6);
+  \draw[pcflow] (m6.east) -| node[near start,above,font=\scriptsize]{\tn{תיקון}} (m1.south);
+  \draw[pcflow] (m5) -- node[right,font=\scriptsize]{\tn{שינוי גרסה}} (m7);
+  \draw[pcflow] (m7.east) -- node[above,font=\scriptsize]{\tn{לבדיקה מחדש}} (m6.west |- m7.east) -- (m3.south west);
+\end{pctikz}}}
+\caption{מכונת המצבים של אישור פריט: רק מצב \texttt{\latin{approved}} מגיע ללומד; שינוי גרסה מחזיר פריט לבדיקה}\label{fig:hitl}
+\end{figure}
+
+\subsection{מכונת המצבים של סימולציית \latin{3D}}
+הסימולציה אינה סצנה שנבנתה ידנית אלא תבנית פרמטרית שטוענת תצורת \texttt{\latin{ScenarioConfig}}. בכל צומת התבנית מציגה את המצב, הלומד בוחר, והמערכת
+משווה לתשובה הנכונה בתצורה, מציגה משוב מעוגן (\texttt{\latin{evidence\_id}}) ורושמת אירוע. איור~\ref{fig:sim} מציג את המצבים; תנאי ההצלחה של כל משימה
+מוגדרים בתצורה, ומהם נגזר שיעור ההשלמה (\req{15}).
+\begin{figure}[!htbp]
+\centering
+\pcFig{sim_fsm}{%
+\pcAutoFit{\begin{pctikz}[x=1cm,y=1cm]
+  \tikzset{ms/.style={pcnode,text width=2.0cm,font=\scriptsize\sffamily,minimum height=7mm}}
+  \node[ms,fill=pcDark,text=white] (t0) at (0,0) {\tn{טעינת תצורת \latin{JSON}}};
+  \node[ms] (t1) at (-2.9,0) {\tn{תצפית בסצנה}};
+  \node[ms] (t2) at (-5.8,0) {\tn{בחירה בצומת החלטה}};
+  \node[ms] (t3) at (-8.7,0) {\tn{משוב מעוגן + רישום אירוע}};
+  \node[ms,fill=pcGood!20,draw=pcGood] (t4) at (-11.6,0) {\tn{סיום: חישוב השלמה}};
+  \foreach \a/\b in {t0/t1,t1/t2,t2/t3,t3/t4}{\draw[pcflow] (\a) -- (\b);}
+  \draw[pcflow] (t3.south) -- ++(0,-0.9) -| node[near start,below,font=\scriptsize]{\tn{צומת הבא}} (t1.south);
+\end{pctikz}}}
+\caption{מכונת המצבים של הסימולציה: כל החלטה נרשמת עם מזהה ראיה לפני המעבר לצומת הבא}\label{fig:sim}
+\end{figure}
+\textbf{תקציב \latin{VRAM} וקצב.} זיכרון הכרטיס לדגם \mth{P} פרמטרים בדיוק של \mth{b} סיביות הוא
+\begin{equation}
+  M_{VRAM}\approx \frac{P\cdot b}{8}+2\,L\,H_{kv}\,d_h\,B\,N_{ctx}+M_{other},
+\end{equation}
+כאשר \mth{L} מספר השכבות, \mth{H_{kv}} מספר ראשי המפתח-ערך, \mth{d_h} ממד הראש, \mth{B} מספר הבתים לאלמנט ו-\mth{N_{ctx}} אורך ההקשר. עבור דגם
+בגודל \latin{8B} בדיוק \latin{4} סיביות עם \mth{L=32}, \mth{H_{kv}=8}, \mth{d_h=128} ו-\mth{B=2} (תצורה אופיינית לדגמי משפחה זו):
+משקלים \mth{4.0} \latin{GB}, זיכרון הקשר \mth{1.1} \latin{GB} ל-\mth{8192} טוקנים (\mth{4.3} \latin{GB} ל-\latin{32,768}),
+מודל ייצוג ומדרג כ-\mth{1.3} \latin{GB}, תקורת הפעלה כ-\mth{1.0} \latin{GB} ותצוגת \latin{3D} כ-\mth{2.0} \latin{GB}: סך הכול
+כ-\mth{9.4} \latin{GB} (טבלה~\ref{tab:budget}), ולכן מומלץ כרטיס בעל זיכרון של יותר מ-\latin{16} \latin{GB} (למשל \latin{24} \latin{GB}), כדי להשאיר מרווח להקשר ארוך ולהרצה מקבילה של המודל והתצוגה.
+זמן התגובה לשאילתה: \mth{T=T_{retr}+T_{pre}+N_{out}/v}; ב-\mth{T_{retr}=0.3} \latin{s}, \mth{T_{pre}=1.5} \latin{s} ו-\mth{N_{out}=300} טוקנים,
+יעד \req{08} (\mth{T\le10} \latin{s}) מחייב קצב \mth{v\ge37} טוקנים לשנייה; בקצב \mth{40} נקבל \mth{9.3} \latin{s}, ובקצב \mth{20} --- \mth{16.8} \latin{s}.
+הקצב ייבדק בשבוע \latin{5}, ואם יהיה נמוך מהסף ייעשה מעבר לדגם קטן יותר או קיצור הפלט.
+\begin{table}[!htbp]
+\centering
+\caption{תקציב הנדסי מחושב: זיכרון \latin{GPU} וזמן תגובה (פרמטרי תכנון; יימדדו בשבוע \latin{5})}\label{tab:budget}
+\begin{pctable}{H{0.34},C{0.16},H{0.50}}
+  \pchead{רכיב & ערך & אופן חישוב ומעמד}
+  \pcrow{משקלי דגם \latin{8B}, \latin{4-bit} & \num{4.0} \latin{GB} & \mth{8\cdot10^9\times4/8}; חישוב}
+  \pcrow{זיכרון הקשר (\latin{8,192} טוקנים) & \num{1.1} \latin{GB} & \mth{2\cdot32\cdot8\cdot128\cdot2\cdot8192}; חישוב לפי ארכיטקטורה אופיינית}
+  \pcrow{מודל ייצוג + מדרג & \num{1.3} \latin{GB} & הערכה; ייבדק בהתקנה}
+  \pcrow{תקורת הפעלה & \num{1.0} \latin{GB} & הערכה}
+  \pcrow{תצוגת \latin{3D} & \num{2.0} \latin{GB} & הערכה; תלוי במנוע}
+  \pcrow{\textbf{סה"כ} & \textbf{\num{9.4} \latin{GB}} & מחושב; גדל ל-\mth{\approx12.6} \latin{GB} בהקשר של \latin{32,768}}
+  \pcrow{זמן תגובה לשאילתה & \num{9.3} \latin{s} & \mth{0.3+1.5+300/40}; בהנחת \latin{40} טוקנים לשנייה}
+\end{pctable}
+\end{table}
+
+\section{כלים מהתואר שהופעלו בפרק}\label{sec:mot}
+הפרק נשען על שיטות מתואר ניהול הטכנולוגיות, והטבלה מפרטת איפה כל אחת הופעלה (טבלה~\ref{tab:mot}).
+\begin{table}[!htbp]
+\centering
+\caption{שיטות מתואר ניהול הטכנולוגיות והיישום שלהן בפרק}\label{tab:mot}
+\begin{pctable}{H{0.27},H{0.36},H{0.37}}
+  \pchead{תחום בתואר & שיטה & יישום בפרק}
+  \pcrow{ניתוח החלטות רב-קריטריוני \latin{(MCDA)} & מטריצת \latin{Pugh}, משקולות וניתוח רגישות & טבלאות~\ref{tab:pugh}--\ref{tab:sens}; נקודות מעבר בין חלופות}
+  \pcrow{הנדסת מערכות \latin{(Systems Engineering)} & דרישות עם עקיבות, \latin{DFD}, ממשקים, מכונות מצבים & איורים~\ref{fig:dfd}--\ref{fig:sim}, טבלה~\ref{tab:schema}}
+  \pcrow{חקר ביצועים \latin{(Operations Research)} & תורי \latin{M/M/1}, תכנון קיבולת & קיבולת המומחה; הגבלת קצב ההפקה}
+  \pcrow{ניהול סיכונים & \mth{R=P\times I}, שערי \latin{Go/No-Go} & שער הבחירה; פרק~\ref{ch:risk}}
+  \pcrow{ניהול פרויקטים & \latin{WBS}, תלויות ונתיב קריטי & הפיכת הארכיטקטורה לחבילות עבודה (פרק~\ref{ch:plan})}
+\end{pctable}
+\end{table}
+
+\section{חדשנות}\label{sec:innovation}
+\begin{pcbox}[pcGood]{מה חדש}
+\textbf{ההצהרה:} שרשרת ניהולית-הנדסית מדידה ממסמך ולקח, דרך אחזור ויצירת תוצר מאושר, ועד תבנית \threeD{} שמאוכלסת אוטומטית מתצורת
+\latin{JSON} ומתעדכנת עם שינוי גרסה --- ולא יצירת טקסט אוטומטית בלבד. \textbf{סוג החדשנות:} שילוב ויישום.\par
+\textbf{ביחס למאמר הדגל:} מוסיף עיגון לגרסה ולעמוד, אישור מומחה לפני פרסום, מדידת זמן מול בסיס ידני ותרגול \latin{3D}
+\cite{hua2025civask}. \textbf{ביחס למוצרי השוק:} פריסה מקומית מבודדת עם עקיבות מקור-גרסה-יחידה, שאינה מתועדת במוצרים
+שנסקרו (טבלה~\ref{tab:products}).\par
+\textbf{מה אינו חדש:} טכניקת ה-\latin{RAG} עצמה ומדדי הנאמנות נלקחים מן הספרות \cite{lewis2020retrieval,es2024ragas}.
+\textbf{מענה לפער:} השילוב שהוגדר בסעיף~\ref{sec:gap}.
+\textbf{הוכחה:} ניסוי משימות שקולות (ידני מול אב-טיפוס) ותרגיל \latin{2D} מול \latin{3D} בעל תוכן זהה, לפי טבלה~\ref{tab:eval}.
+\end{pcbox}
+\pcChapterEnd{alt}
+
+\pcIfSolution{afteralternatives}

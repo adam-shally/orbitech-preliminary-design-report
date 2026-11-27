@@ -1,0 +1,207 @@
+%% =====================================================================
+%%  CHAPTER 5: MARKET RESEARCH AND EXISTING PRODUCTS    (budget 6 pages)
+%%  chapters/ch5-market.tex   Every number below carries its source;
+%%  no unsourced "assumption scores" remain (planning assumptions are labelled).
+%% =====================================================================
+\pcChapter{market}{6}{חקר שוק ומוצרים קיימים}
+\begin{pcguide}[הכסף מדבר]
+צריך לשכנע את הקורא שיש כאן “בשר”. לוקחים דוחות שוק שחברות מחקר פרסמו ומחלצים מהם נתונים בצורה מקצועית.
+\textbf{לכל מספר, נתון, גרף או נוסחה יש מקור} (\texttt{\textbackslash{}figsrc\{..\}}); ההשוואה היא טכנית ולא שיווקית.
+תקציב: \latin{1.5} + \latin{1.5} + \latin{1} + \latin{1} + \latin{1} עמודים לפי הסעיפים.
+\end{pcguide}
+
+\section{היקף השוק: \latin{TAM} ו-\latin{SAM}}\label{sec:tam}
+שוק הייחוס הרחב הוא תוכנות ניהול ידע ארגוניות, ואילו סימולציות \latin{3D} הן שכבת הדרכה ייעודית מעליהן. שני שווקים אלה
+חופפים חלקית, ולכן שוויים אינו מסוכם. לפי \latin{Grand View Research}, שוק תוכנות ניהול הידע העולמי עמד על \money{\$}{20.1B}
+בשנת \latin{2024}, והתחזית לשנת \latin{2033} היא \money{\$}{62.2B}, עם שיעור צמיחה שנתי מורכב \latin{(CAGR)} של \pct{13.6}
+לתקופה \rng{2025}{2033} \cite{gvr2025market}. בשוק הסמוך של הדרכה אימרסיבית (\latin{VR/AR/MR}) מדווחים אותם אנליסטים על
+\money{\$}{16.4B} בשנת \latin{2024} ועל \money{\$}{69.59B} בשנת \latin{2030}, עם \latin{CAGR} של \pct{28.3} לתקופה \rng{2025}{2030}
+\cite{gvr2025immersive}. אלה נתוני אנליסט חיצוניים על קטגוריות רחבות: הם מתארים את סביבת הפעולה, ואינם מעידים
+על ביקוש מוכח לפתרון הפיילוט.
+
+את \latin{SAM} אפשר לחשב מנתוני החיתוך שפורסמו באותו דוח: ארגונים גדולים מהווים \pct{66.61} מהכנסות שוק תוכנות ניהול הידע,
+ופריסת ענן מהווה \pct{65.50} מהן \cite{gvr2025market}, ולכן פריסה שאינה בענן מהווה כ-\pct{34.5}. פיילוט מקומי ומנותק מתאים לארגון
+גדול שאינו יכול לשלוח ידע החוצה, ולכן
+\begin{equation}
+  SAM_{2024}=TAM_{2024}\times s_{\mathrm{large}}\times s_{\mathrm{non\text{-}cloud}}=20.1\times0.6661\times0.345\approx 4.62\ \mathrm{B\$}.
+\end{equation}
+החישוב מניח שחלקה של הפריסה הלא-ענן בארגונים גדולים דומה לחלקה בכלל השוק; אין בדוח חיתוך משולב, והנחה זו מסומנת כהנחה. בשנת
+\latin{2033}, בהנחת שיעורי חלוקה קבועים, ערך זה יגיע לכ-\money{\$}{14.3B}. טבלה~\ref{tab:tam} מרכזת את השכבות, חישובן ומקורן.
+\begin{table}[!htbp]
+\centering
+\caption[שכבות השוק: ערך, חישוב ומקור]{שכבות השוק: ערך, חישוב ומקור (נתוני אנליסט: \latin{Grand View Research} \cite{gvr2025market,gvr2025immersive}; נתוני \latin{IAI}: \cite{iai2025about}; מחיר: \cite{manualto2026pricing})}\label{tab:tam}
+\begin{pctable}{c,H{0.25},C{0.16},H{0.25},H{0.22}}
+  \pchead{שכבה & הגדרה & ערך & חישוב & מקור ומעמד}
+  \pcrow{\latin{TAM} & תוכנות ניהול ידע, העולם, \latin{2024}; תחזית \latin{2033} & \money{\$}{20.1B}; \money{\$}{62.2B} & נתון מדווח; \latin{CAGR} \pct{13.6} (\rng{2025}{2033}) & אנליסט \cite{gvr2025market}}
+  \pcrow{\latin{TAM} סמוך & הדרכה אימרסיבית, \latin{2024}; תחזית \latin{2030} & \money{\$}{16.4B}; \money{\$}{69.59B} & נתון מדווח; \latin{CAGR} \pct{28.3} (\rng{2025}{2030}); לא מסוכם עם הקודם & אנליסט \cite{gvr2025immersive}}
+  \pcrow{\latin{SAM} & ארגונים גדולים עם פריסה שאינה בענן, \latin{2024} & \money{\$}{4.62B} & \mth{20.1\times0.6661\times0.345} & נתוני חיתוך מדווחים \cite{gvr2025market}; הנחת חלק זהה לארגונים גדולים}
+  \pcrow{\latin{SOM} & ראו סעיף~\ref{sec:som} & \money{\$}{76.5K} עד \money{\$}{306K} לשנה & היקף משתמשים \mth{\times} מחיר מקביל & \latin{IAI} \cite{iai2025about}; מחיר \cite{manualto2026pricing}; חדירה: הנחת תכנון}
+\end{pctable}
+\end{table}
+
+\section{סקירת מוצרים קיימים}\label{sec:products}
+נבחרו מוצרים מסחריים המייצגים חמש גישות: הוראות עבודה דיגיטליות, חיפוש ידע ארגוני, לכידת ידע מומחים והדרכה
+במציאות רבודה וב\threeD{}, פלטפורמת יישומי שטח, והאלטרנטיבה הידנית. טבלה~\ref{tab:products} מציגה לכל מוצר את מה שניתן
+לאמת במקורות פומביים: מודל רישוי ומחיר, מדד ביצועים או זמן הכנה שפורסם, והערה על הפער ביחס לפרויקט. ככל ששדה אינו
+מופיע במקור, נכתב ש“לא פורסם”; אין בכך קביעה שהיכולת חסרה, אלא שאין לה ראיה במקורות שנסקרו.
+\begin{table}[!htbp]
+\centering
+\caption[מוצרים מסחריים: רישוי, מדדים שפורסמו ופער]{מוצרים מסחריים: רישוי, מדדי ביצועים שפורסמו והפער ביחס לפרויקט. מקורות: דפי היצרנים \cite{dozuki,poka,glean,guru,vuforia,microsoftguides}; מחירים ומדדים של צד שלישי \cite{manualto2026pricing,manualto2026best,g2dozuki,capterraguru,g2vuforiaec}; נבדקו ב-\latin{26-11-2026}}\label{tab:products}
+\begin{pctable}{H{0.17},H{0.20},H{0.27},H{0.18},H{0.18}}
+  \pchead{מוצר (קטגוריה) & רישוי ומחיר & מדד ביצועים או זמן הכנה שפורסם & מגבלה ביחס לפרויקט & מעמד המידע}
+  \pcrow{\latin{Dozuki} (הוראות עבודה) & הצעת מחיר בלבד \cite{g2dozuki}; אומדן: כ-\money{\$}{850} לחודש, מינימום \latin{50} משתמשים (כ-\money{\$}{17} למשתמש) \cite{manualto2026pricing} & לא פורסם & עיגון \latin{RAG} וניתוק מלא לא צוינו & אומדן צד שלישי}
+  \pcrow{\latin{Poka} (הוראות עבודה) & לפי הצעה, מחיר לא פורסם \cite{poka} & לא פורסם & מחולל שאלות מאושר ועיגון בגרסה לא צוינו & דף יצרן}
+  \pcrow{\latin{L2L} (הוראות עבודה) & מחיר מפורסם: \money{\$}{150} למשתמש לחודש \cite{manualto2026pricing} & לא פורסם & תרגול \latin{3D}, \latin{RAG} ופריסה מקומית לא צוינו & דיווח צד שלישי}
+  \pcrow{\latin{VKS} (הוראות עבודה) & כ-\money{\$}{350} למשתמש לחודש, לפי דיווחי משתמשים \cite{manualto2026pricing}; בקרת גרסאות מובנית \cite{manualto2026best} & לא פורסם & עיגון במקור ותרגול לא צוינו & לא מאומת}
+  \pcrow{\latin{Tulip} (יישומי שטח) & תוכנית חינמית; מחיר תוכניות בתשלום לא פורסם \cite{manualto2026pricing} & טענת היצרן: חיסכון של \gesym{80\%} בזמן פיתוח יישום \cite{manualto2026best} & הפקת הדרכה ממסמכי נוהל מגורסאים לא צוינה & טענת יצרן; לא נבדקה}
+  \pcrow{\latin{Guru} (חיפוש ארגוני) & הצעת מחיר מותאמת \cite{capterraguru} & לא פורסם & תרגול ומבחן כשירות לא צוינו & דף יצרן \cite{guru}}
+  \pcrow{\latin{Glean} (חיפוש ארגוני) & מחיר לא פורסם \cite{glean} & לא פורסם & תרגול וניתוק מלא לא צוינו & דף יצרן}
+  \pcrow{\latin{Vuforia Expert Capture} (לכידת מומחה, \latin{AR}) & לא מופיע מחיר \cite{g2vuforiaec} & לא פורסם & עיגון גרסאות במסמך ואישור מומחה לא צוינו & דף יצרן \cite{vuforia}}
+  \pcrow{\latin{Dynamics 365 Guides} (\latin{MR}) & פרישה מתוכננת ב-\latin{31-12-2026} \cite{microsoftguides} & לא פורסם & תלות בספק; אינו מתאים לטווח ארוך & דף מחזור חיים}
+  \pcrow{אלטרנטיבת האקסל (ידני) & ללא רישוי נוסף; שעות עבודה ידניות & יימדד כבסיס בפיילוט \latin{(D4)} & אין אחזור אוטומטי, יצירה או תרגול & מדידה עצמית}
+\end{pctable}
+\end{table}
+שני מוצרים מוצגים בעיקר כמקרי ניהול סיכון. \latin{Dynamics 365 Guides} מדגים תלות בספק: לפי דף מחזור חיי המוצר, מועד
+פרישתו הוא \latin{31-12-2026} \cite{microsoftguides}, ולכן לא ייבחר כבסיס לטווח ארוך. \latin{Vuforia Expert Capture} הוא המתחרה הקרוב ביותר
+לרכיב לכידת ידע המומחים: דף היצרן מציג יכולת לכידה ב-\latin{AR/3D} במודל שירות \latin{SaaS}, והבינה המלאכותית מוזכרת בו לבדיקות איכות
+בלבד; דף המוצר אינו מציין בקרת גרסאות או אישור מומחה \cite{vuforia}. אלה בדיוק הרכיבים שהפרויקט מוסיף.
+
+\section{מחיר מול שקיפות ביצועים}\label{sec:pricecmp}
+המחירים שפורסמו הם מעטים וחלקם משוערים. איור~\ref{fig:pricebar} מציג את כל המחירים למשתמש לחודש שניתן לגזור ממקורות
+פומביים לשלושה מוצרים מטבלה~\ref{tab:products}; לשאר המוצרים אין מחיר מפורסם, ולכן אינם מופיעים כעמודה. קנה המידה לוגריתמי,
+משום שהפער בין המחירים הוא פי עשרים ויותר.
+\begin{figure}[!htbp]
+\centering
+\pcFig{price_bar}{%
+\pcAutoFit{\begin{pctikz}
+\begin{axis}[ybar,ymode=log,width=10cm,height=5.8cm,ymin=5,ymax=1000,bar width=1.2cm,enlarge x limits=0.28,
+  symbolic x coords={Dozuki,L2L,VKS},xtick=data,ytick={10,100,1000},yticklabels={10,100,1000},
+  ylabel={\tn{דולר למשתמש לחודש (סולם לוגריתמי)}},grid=major,
+  legend style={at={(0.5,-0.2)},anchor=north,legend columns=3,font=\scriptsize,draw=none},
+  nodes near coords,every node near coord/.append style={font=\scriptsize},
+  tick label style={font=\small},label style={font=\small}]
+  \addplot[fill=pcWarn!80,draw=pcDark,bar shift=0pt] coordinates {(Dozuki,17)};
+  \addplot[fill=pcGood!80,draw=pcDark,bar shift=0pt] coordinates {(L2L,150)};
+  \addplot[fill=pcBad!70,draw=pcDark,bar shift=0pt] coordinates {(VKS,350)};
+  \legend{\tn{אומדן צד שלישי},\tn{פורסם בידי היצרן},\tn{דיווחי משתמשים (לא מאומת)}}
+\end{axis}
+\end{pctikz}}}
+\caption[מחיר רישוי למשתמש לחודש]{מחיר רישוי למשתמש לחודש לפי מוצר. מקורות: \latin{Dozuki} --- אומדן של \latin{Manual.to} (כ-\money{\$}{850} לחודש חלקי \latin{50} משתמשים) \cite{manualto2026pricing}; \latin{L2L} --- מחיר מפורסם כפי שמובא באותו דף \cite{manualto2026pricing}; \latin{VKS} --- דיווחי משתמשים באותו דף (לא מאומת). \latin{Manual.to} היא מתחרה ולכן המחירים מצריכים אימות מול היצרנים}\label{fig:pricebar}
+\end{figure}
+מחיר אינו מדד איכות, ולכן נבדק גם מה מפורסם על ביצועים. איור~\ref{fig:disclosure} מסמן לכל אחד מתשעת המוצרים אם
+במקורות שנסקרו מופיע ערך מספרי עבור חמישה מדדים: מחיר, זמן הכנה, נאמנות או דיוק, ניהול גרסאות ופריסה מקומית.
+רק \latin{5} מתוך \latin{45} התאים מלאים (כ-\pct{11}), ואף מוצר אינו מפרסם מדד נאמנות או פריסה מקומית.
+\begin{figure}[!htbp]
+\centering
+\pcFig{disclosure}{%
+\pcAutoFit{\begin{pctikz}[x=1cm,y=0.62cm]
+  \node[font=\scriptsize\sffamily,text width=1.7cm,align=center,anchor=south] at (0,0.1) {\tn{מחיר}};
+  \node[font=\scriptsize\sffamily,text width=1.7cm,align=center,anchor=south] at (-1.9,0.1) {\tn{זמן הכנה}};
+  \node[font=\scriptsize\sffamily,text width=1.7cm,align=center,anchor=south] at (-3.8,0.1) {\tn{נאמנות או דיוק}};
+  \node[font=\scriptsize\sffamily,text width=1.7cm,align=center,anchor=south] at (-5.7,0.1) {\tn{ניהול גרסאות}};
+  \node[font=\scriptsize\sffamily,text width=1.7cm,align=center,anchor=south] at (-7.6,0.1) {\tn{פריסה מקומית}};
+  \foreach \nm/\r/\va/\vb/\vc/\vd/\ve in {Dozuki/1/1/0/0/0/0, Poka/2/0/0/0/0/0, L2L/3/1/0/0/0/0, VKS/4/1/0/0/1/0, Tulip/5/0/1/0/0/0,
+                                   Guru/6/0/0/0/0/0, Glean/7/0/0/0/0/0, {Vuforia EC}/8/0/0/0/0/0, {Dynamics 365 Guides}/9/0/0/0/0/0}{
+    \node[font=\scriptsize\sffamily,anchor=west] at (0.4,-\r) {\nm};
+    \foreach \v [count=\k from 0] in {\va,\vb,\vc,\vd,\ve}{
+      \ifnum\v=1 \fill[pcDark] ({-1.9*\k},-\r) circle (0.17);
+      \else \draw[pcGrey,thick] ({-1.9*\k},-\r) circle (0.17);\fi}
+  }
+\end{pctikz}}}
+\caption[גילוי מדדים מספריים בידי המוצרים]{גילוי מדדים מספריים בטבלה~\ref{tab:products}: עיגול מלא --- ערך מספרי מופיע במקור שנסקר; עיגול ריק --- לא פורסם. מקורות: מחיר --- \cite{manualto2026pricing,g2dozuki}; זמן הכנה (טענת יצרן, \latin{Tulip}) --- \cite{manualto2026best}; ניהול גרסאות (\latin{VKS}) --- \cite{manualto2026best}; דפי היצרנים \cite{poka,glean,guru,vuforia,microsoftguides}. ריק אינו הוכחה להיעדר יכולת}\label{fig:disclosure}
+\end{figure}
+מכאן שתרשים פיזור של מחיר מול ביצוע מדוד של מוצרים מסחריים אינו אפשרי כרגע: רק שתי טענות זמן הכנה כמותיות פורסמו, שתיהן של
+יצרנים ולא של מדידה עצמאית, ואין ביניהן מדד משותף. זהו הנימוק לבנצ'מרק העצמי בסעיף~\ref{sec:bench}: הוא ימדוד זמן הפקה, נאמנות
+וניהול גרסאות באותם מסמכים ובאותן שאלות, ויאפשר לראשונה להציב את ביצועי אב-הטיפוס על ציר אחד מול הבסיס הידני.
+את חלופות התכן של הפרויקט עצמו (ולא מוצרי שוק) משווה פרק~\ref{ch:alt}.
+
+\section{\latin{SOM}: שוק שאפשר להשיג}\label{sec:som}
+ה-\latin{SOM} מוגדר כאן מלמטה למעלה, מאוכלוסיית משתמשים ומחיר מקביל, ולא כאחוז שרירותי מה-\latin{SAM}. נקודת המוצא היא
+פריסה ראשונית ביחידות ההדרכה והרכש ובמסגרת טכנית של חטיבה אחת בתעשייה האווירית, ובשלב ב' --- בכל ארבע חטיבותיה, שהן
+כ-\latin{15,000} עובדים \cite{iai2025about}; ארגוני תעשיית ביטחון ותעופה דומים הם הרחבה אפשרית שלא כומתה, משום שאין עליהם
+מקור שאומת. הערך חושב ממחיר מקביל של \money{\$}{17} למשתמש לחודש, אומדן הצד השלישי הנמוך מבין המחירים שנמצאו
+\cite{manualto2026pricing}. שיעור החדירה בתוך החטיבה הוא הנחת תכנון, ולכן הוא מוצג כטווח (טבלה~\ref{tab:som}).
+\begin{table}[!htbp]
+\centering
+\caption[SOM מלמטה למעלה]{\latin{SOM} מלמטה למעלה. נתונים: \latin{15,000} עובדים בארבע חטיבות \cite{iai2025about}; מחיר \money{\$}{17} למשתמש לחודש \cite{manualto2026pricing}; הנחת חלוקה שווה בין חטיבות ושיעור חדירה: הנחות תכנון. ערך שנתי \mth{=} משתמשים \mth{\times 17 \times 12}}\label{tab:som}
+\begin{pctable}{H{0.26},C{0.15},C{0.15},C{0.15},C{0.15},C{0.14}}
+  \pchead{תרחיש & חדירה & משתמשים (שלב א')& ערך שנתי (שלב א') & משתמשים (שלב ב') & ערך שנתי (שלב ב')}
+  \pcrow{זהיר & \pct{5} & \num{188} & \money{\$}{38K} & \num{750} & \money{\$}{153K}}
+  \pcrow{\textbf{בסיס} & \pct{10} & \num{375} & \textbf{\money{\$}{76.5K}} & \num{1,500} & \textbf{\money{\$}{306K}}}
+  \pcrow{אופטימי & \pct{20} & \num{750} & \money{\$}{153K} & \num{3,000} & \money{\$}{612K}}
+\end{pctable}
+\end{table}
+בתרחיש הבסיס ערך ה-\latin{SOM} הוא \money{\$}{76.5K} בשנה בשלב א' ו-\money{\$}{306K} בשלב ב', כלומר כ-\pct{0.0017} ו-\pct{0.0066} מה-\latin{SAM},
+בהתאמה. הנתון הקטן מכוון: הוא מבטא שוק נגיש ממשי לפיילוט ארגוני, ולא פוטנציאל תיאורטי. הוא אינו הכנסה של קבוצת הסטודנטים אלא
+הערכת ערך השוק של פריסה כזו לפי מחירי מוצרים דומים, והרגישות העיקרית שלו היא לשיעור החדירה ולמחיר המשתמש. איור~\ref{fig:somfunnel}
+מסכם את שלוש השכבות.
+\begin{figure}[!htbp]
+\centering
+\pcFig{som_funnel}{%
+\pcAutoFit{\begin{pctikz}[x=1cm,y=1cm]
+  \fill[pcPrimary!18,draw=pcPrimary,thick] (0,0) -- (9,0) -- (8,-1.2) -- (1,-1.2) -- cycle;
+  \fill[pcPrimary!40,draw=pcPrimary,thick] (1,-1.2) -- (8,-1.2) -- (6.8,-2.4) -- (2.2,-2.4) -- cycle;
+  \fill[pcPrimary!78,draw=pcDark,thick] (2.2,-2.4) -- (6.8,-2.4) -- (5.8,-3.6) -- (3.2,-3.6) -- cycle;
+  \node[font=\small\sffamily\bfseries] at (4.5,-0.6) {\latin{TAM}: \latin{\$20.1B} (\latin{2024})};
+  \node[font=\small\sffamily\bfseries] at (4.5,-1.8) {\latin{SAM}: \latin{\$4.62B}};
+  \node[font=\small\sffamily\bfseries,text=white] at (4.5,-3.0) {\latin{SOM}: \latin{\$76.5K}--\latin{\$306K}};
+\end{pctikz}}}
+\caption[שלוש שכבות השוק]{שלוש שכבות השוק; גודל הצורות אינו בקנה מידה. מקורות: \latin{TAM} --- \cite{gvr2025market}; \latin{SAM} --- חישוב מנתוני החיתוך שבאותו דוח (טבלה~\ref{tab:tam}); \latin{SOM} --- טבלה~\ref{tab:som} לפי \cite{iai2025about,manualto2026pricing}}\label{fig:somfunnel}
+\end{figure}
+
+\subsection{רגישות למחיר המשתמש}\label{sec:somsens}
+המחיר של \money{\$}{17} הוא הנמוך שבין שלושה מחירי צד שלישי שנמצאו (טבלה~\ref{tab:products}); אותה אוכלוסיית משתמשים בתרחיש הבסיס מניבה ערך שונה בסדר גודל לפי
+המחיר שנבחר. טבלה~\ref{tab:somsens} מציגה את ההפרש, כדי שהקורא יראה שההערכה רגישה למחיר לא פחות מאשר לשיעור החדירה.
+\begin{table}[!htbp]
+\centering
+\caption[רגישות ה-SOM למחיר המשתמש]{רגישות ה-\latin{SOM} למחיר משתמש לחודש, בתרחיש הבסיס (\latin{375} משתמשים בשלב א', \latin{1,500} בשלב ב'). מחירים: \cite{manualto2026pricing}; הם דיווחי צד שלישי שלא אומתו מול היצרנים. ערך שנתי \mth{=} משתמשים \mth{\times} מחיר \mth{\times 12}}\label{tab:somsens}
+\begin{pctable}{H{0.28},C{0.16},C{0.18},C{0.19},C{0.19}}
+  \pchead{מחיר מקביל (לפי מוצר) & מחיר למשתמש לחודש & מכפיל מול הנמוך & ערך שנתי (שלב א') & ערך שנתי (שלב ב')}
+  \pcrow{\latin{Dozuki}, אומדן & \money{\$}{17} & \latin{1.0}\mth{\times} & \money{\$}{76.5K} & \money{\$}{306K}}
+  \pcrow{\latin{L2L}, מחיר מפורסם & \money{\$}{150} & \latin{8.8}\mth{\times} & \money{\$}{675K} & \money{\$}{2.7M}}
+  \pcrow{\latin{VKS}, דיווחי משתמשים & \money{\$}{350} & \latin{20.6}\mth{\times} & \money{\$}{1.575M} & \money{\$}{6.3M}}
+\end{pctable}
+\end{table}
+הטווח הרחב (פי \latin{20.6} בין הקצוות) הוא הסיבה לכך שהדוח אינו מציג את ה-\latin{SOM} כהכנסה צפויה ואינו בונה עליו החלטת
+\latin{Go/No-Go}. שני גורמים נוספים מגבילים את ההערכה: ראשית, ארגון כמו \latin{IAI} עשוי לרכוש רישיון אתר או לפתח פנימית ולא לשלם
+לפי משתמש, ולכן מחיר למשתמש הוא קירוב ולא תחזית מסחרית; שנית, שיעור חדירה של \pct{10} הוא הנחת תכנון שלא נבדקה מול
+נתוני שימוש של הארגון. השימוש הנכון בטבלה הוא כטווח התייחסות לעלות החלופה של הארגון (מה היה משלם על מוצר מקביל), ולא כמדד להצלחת
+הפרויקט, שנמדדת ביעדי פרק~\ref{ch:problem}.
+
+\section{בנצ'מרק}\label{sec:bench}
+\begin{pcguide}[בנצ'מרק לעומת חקר שוק]
+חקר השוק שואל “מה קיים ובכמה?”; הבנצ'מרק שואל “מי עושה את זה הכי טוב, איך, ובכמה אנחנו רחוקים ממנו?”.
+הפער שנמדד הופך ליעד מדיד בדוח, ובהמשך למה שהסימולציה צריכה להראות.
+\end{pcguide}
+לאחר שהוכח שהשוק אינו מפרסם נתוני ביצוע (איור~\ref{fig:disclosure}), הבנצ'מרק מגדיר מדידה עצמית על אותו סט מסמכים ושאלות לכל
+חלופה, בחמישה שלבים (טבלה~\ref{tab:benchmark}). המדדים: חציון דקות ליחידה מאושרת, שיעור טענות נתמכות במדגם בידי שני
+מעריכים, מספר פריטים מיושנים שלא נחסמו לאחר שינוי גרסה, מספר בקשות לרשת חיצונית (יעד אפס) ושיעור שאלות שעברו את מחוון האיכות.
+לתרחיש ה-\latin{3D} יימדדו בנוסף זמן בניית תרחיש מאושר, אחוז הפעולות שתועדו, שיעור ההשלמה ללא עזרה, וזמן ועלות עדכון הסצנה לאחר
+שינוי נוהל. הפער שיימדד יוזן חזרה לספי הדרישות בפרק~\ref{ch:problem}.
+\begin{table}[!htbp]
+\centering
+\caption{חמשת שלבי הבנצ'מרק}\label{tab:benchmark}
+\begin{pctable}{c,H{0.22},H{0.40},H{0.24}}
+  \pchead{שלב & משימה & מה עושים בפרויקט שלנו & תוצר}
+  \pcrow{\num{1} & מה משווים & בחירת סט של \latin{20} שאלות ומסמכים, זהה לכל חלופה & תיק מבחן}
+  \pcrow{\num{2} & מול מי & הכנת יחידת לימוד ידנית (בסיס) ועם אב-הטיפוס; מסגרת מאמר הדגל כייחוס; בדיקת דמו של מוצר שיתאפשר לבדוק ללא עלות & שני תוצרים שקולים}
+  \pcrow{\num{3} & איסוף נתונים & מדידת זמן, טענות נתמכות ובקרת גרסאות; לכל נתון מקור & קובץ תוצאות}
+  \pcrow{\num{4} & מדידת הפער & חישוב הפער מול ספי הדרישות (\latin{REQ}) ומול מוצר הייחוס & דוח פערים}
+  \pcrow{\num{5} & יעדים ופעולה & תיקון המודל וחזרה על הניסוי & החלטת \latin{Go/No-Go}}
+\end{pctable}
+\end{table}
+\section{מה השוק מלמד ומה נגזר לתכן}\label{sec:marketimpl}
+הממצאים של הפרק מתורגמים להחלטות תכן ומדידה בטבלה~\ref{tab:marketimpl}. כל שורה נשענת על טבלה או איור קודמים בפרק, ולכן אינה מוסיפה טענת שוק חדשה.
+\begin{table}[!htbp]
+\centering
+\pcCompactTables
+\caption[השלכות חקר השוק על התכן]{השלכות חקר השוק על התכן. מקורות: טבלאות~\ref{tab:tam}, \ref{tab:products} ו-\ref{tab:somsens} ואיור~\ref{fig:disclosure}, כלומר דפי היצרנים ודיווחי צד שלישי שצוינו שם}\label{tab:marketimpl}
+\begin{pctable}{H{0.26},H{0.38},H{0.36}}
+  \pchead{ממצא בפרק & משמעות & נגזרת לתכן ולמדידה}
+  \pcrow{אין מוצר שנסקר שמפרסם מדדי נאמנות או זמן הפקה מאומתים (איור~\ref{fig:disclosure}) & השוואה כמותית מול השוק אינה אפשרית מנתונים שפורסמו & הבנצ'מרק מודד בעצמו את הבסיס הידני ואת אב-הטיפוס על אותו סט שאלות (סעיף~\ref{sec:bench})}
+  \pcrow{טווח המחירים רחב מאוד, והוא דיווח צד שלישי שלא אומת (טבלה~\ref{tab:somsens}) & ערך ה-\latin{SOM} אינו בסיס להחלטה כלכלית & החלטת \latin{Go/No-Go} נשענת על מדדי פרק~\ref{ch:problem} ולא על הערכת הכנסה}
+  \pcrow{מוצרים מסוימים מציגים ניהול גרסאות או זמן הכנה מופחת כטענת יצרן (טבלה~\ref{tab:products}) & גרסאות וקיצור זמן הם ציפייה בסיסית ולא חידוש בפני עצמם & הבידול נמדד בשילוב: פריסה מקומית, עיגון לגרסה ותצורת תרחיש \threeD{} שמתעדכנת}
+  \pcrow{ה-\latin{SAM} נגזר מנתוני חיתוך כלליים של שוק ניהול ידע (טבלה~\ref{tab:tam}) & אין נתון על שוק ההדרכה ההנדסית בפריסה מקומית & ההיקף המסחרי אינו נטען; הפרויקט נמדד כפיילוט ארגוני}
+\end{pctable}
+\end{table}
+\pcChapterEnd{market}

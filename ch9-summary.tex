@@ -1,0 +1,56 @@
+%% =====================================================================
+%%  CHAPTER 9: SUMMARY                                 (budget 2 pages)
+%%  chapters/ch9-summary.tex
+%% =====================================================================
+\pcChapter{summary}{2}{סיכום}
+\begin{pcguide}[מה כותבים כאן]
+פרק הסיכום מחבר את הדוח לשורה תחתונה אחת: האם הפרויקט היתכן, על מה זה נשען, ומה עושים מיד לאחר האישור. הדוח הוא חוזה מול המרצה:
+מה תעשו, מה תהיה התוצאה, ואיך ייבדק שעמדתם בכך. בדקו שאין סתירות בין הפרקים.
+\end{pcguide}
+\section{סינתזה: ארבעת עמודי ההיתכנות}\label{sec:synthesis}
+הדוח בוחן אם כדאי לבנות אב-טיפוס מקומי של \latin{Grounded RAG} להפקת יחידות הדרכה ותרגול \threeD{} מחומרים פנימיים. ההיתכנות נשענת על ארבעה
+עמודים, וטבלה~\ref{tab:pillars} מסכמת לכל אחד מהם את המסקנה, את ההוכחה בדוח ואת התנאי שנותר פתוח. הציונים והיעדים בדוח הם יעדי תכנון
+ומודל חישובי; הם יאומתו במדידה בפיילוט, ואינם תוצאות שנצפו בתעשייה האווירית.
+\begin{table}[!htbp]
+\centering
+\caption{ארבעת עמודי ההיתכנות: מסקנה, הוכחה בדוח ותנאי פתוח}\label{tab:pillars}
+\begin{pctable}{H{0.17},H{0.37},H{0.22},H{0.24}}
+  \pchead{עמוד היתכנות & מסקנה מסכמת & הוכחה בדוח & תנאי או שער פתוח}
+  \pcrow{\textbf{צורך} \latin{(Need)} & ידע מקצועי ופעולות חפיפה תלויים במומחים בודדים; בארגון בהיקף \latin{15,000} עובדים בארבע חטיבות \cite{iai2025about} גם שיפור מתון בהכנת חומרי הדרכה רחב השפעה. הצורך נשען על הספרות ועל אפיון הבעיה ולא על נתוני \latin{IAI} & פרקים~\ref{ch:intro} ו-\ref{ch:problem}; \cite{zuin2025tacit} & מדידת בסיס ידני \latin{(D4)}; ראיונות מומחים (\risk{07})}
+  \pcrow{\textbf{תוקף מדעי} \latin{(Scientific Validity)} & ספרות \latin{2023+} תומכת בכל מרכיב לחוד (אחזור מעוגן, הערכה פדגוגית אוטומטית, הדרכת \latin{XR}); הפער שנותר הוא השילוב: עיגון, אישור מומחה, תרחיש \threeDadj{} ומדידת זמן מול בסיס ידני & פרק~\ref{ch:lit}, סעיף~\ref{sec:gap}; \cite{hua2025civask} & בדיקת \hyp{1}--\hyp{4} בפיילוט; היעדים הם יעדי תכנון}
+  \pcrow{\textbf{כדאיות טכנו-כלכלית} \latin{(Techno-Economic Viability)} & דגם מקומי בגודל \latin{7B}--\latin{8B} מכומת דורש בחישוב כ-\mth{9.4} \latin{GB} \latin{VRAM} (\mth{\approx12.6} \latin{GB} בהקשר ארוך), ולכן מתאים לכרטיס של \latin{24} \latin{GB}; שוק ה-\latin{SAM} כ-\money{\$}{4.62B} ו-\latin{SOM} של \money{\$}{76.5K}--\money{\$}{306K} לשנה: שוק צר אך מוגדר & פרקים~\ref{ch:market} ו-\ref{ch:alt}; טבלאות~\ref{tab:som} ו-\ref{tab:budget} & מדידת קצב יצירה בפועל (יעד \gesym{37} טוקנים לשנייה); זמינות \latin{GPU}}
+  \pcrow{\textbf{החלטת ארכיטקטורה} \latin{(Architecture Decision)} & נבחרה חלופה ג (\num{3.95}) לעומת הבסיס הידני (\num{3.85}) וחלופת ה-\latin{LMS} (\num{3.35}). ההפרש קטן ורגיש למשקולות, ולכן הבחירה מותנית בשערי \latin{Go/No-Go} & טבלאות~\ref{tab:pugh} ו-\ref{tab:sens}; סעיף~\ref{sec:arch} & נאמנות \gesym{\pct{90}}, אפס בקשות לרשת חוץ, עמידה ב-\req{08}; בכשל: גיבוי ללא \latin{3D}}
+\end{pctable}
+\end{table}
+המשמעות המנהלית: הבעיה אמיתית וניתנת לכימות, הספרות מצדיקה בדיקה, החומרה והעלות מצויות בהישג, והחלופה הנבחרת נבדקת בשערים שנקבעו מראש. מה שאינו
+מוכח הוא הערך בתנאי הארגון: משך חפיפה, שיעור עזיבה והיקף הידע האבוד טרם נמסרו, ולכן יעדי הפיילוט (דיוק חילוץ \pctto{60}{90}, חיסכון בזמן
+\gesym{\pct{50}} ונאמנות \gesym{\pct{90}}) מוצגים כיעדים שייבדקו.
+
+\needspace{6\baselineskip}
+\section{שלוש הפעולות המיידיות לאחר האישור}\label{sec:actions}
+לאחר אישור המנחה נפתחים שלושה צעדים העוקבים זה אחר זה, והם מגדירים את תנאי הפתיחה של הפיילוט ב-\latin{M0} (איור~\ref{fig:actions}). הראשון הוא הקריטי
+ביותר: בלי החלטה על גישה לנתונים אין קורפוס ארגוני, ולכן נקבע מראש מסלול חלופי על קורפוס פומבי (\risk{01}).
+\begin{figure}[!htbp]
+\centering
+\pcFig{post_approval}{%
+\pcAutoFit{\begin{pctikz}[x=1cm,y=1cm]
+  \node[pcnodeD,text width=3.5cm,minimum height=1.0cm] (h1) at (0,0) {\tn{\latin{1.} בקשת נתונים והרשאות \latin{(Data/Access Request)}}};
+  \node[pcnodeD,text width=3.5cm,minimum height=1.0cm] (h2) at (-4.3,0) {\tn{\latin{2.} הקמת \latin{GitHub} וכונן משותף \latin{(Setup)}}};
+  \node[pcnodeD,text width=3.5cm,minimum height=1.0cm] (h3) at (-8.6,0) {\tn{\latin{3.} פגישת פתיחה \latin{(Kickoff Meeting)}}};
+  \node[pcnode,text width=3.5cm,anchor=north,font=\scriptsize\sffamily] (d1) at (0,-0.8) {\tn{בקשה בכתב לאיש הקשר ב-\latin{IAI}: היקף הקורפוס, סיווג ומומחים לראיונות. אחראי: \StudentTwo; מיד לאחר האישור}};
+  \node[pcnode,text width=3.5cm,anchor=north,font=\scriptsize\sffamily] (d2) at (-4.3,-0.8) {\tn{מאגר פרטי ותיקיות לקורפוס, שאלות אמת, יומנים ודוח; ללא מידע מסווג. אחראי: \StudentOne; עד \latin{M0}}};
+  \node[pcnode,text width=3.5cm,anchor=north,font=\scriptsize\sffamily] (d3) at (-8.6,-0.8) {\tn{עם המנחה ואיש הקשר: אישור שאלת המחקר, הקורפוס והמדדים. אחראי: \StudentTwo; שבוע \latin{1} (\latin{07-03-2027})}};
+  \draw[pcflow] (h1.west) -- (h2.east);
+  \draw[pcflow] (h2.west) -- (h3.east);
+  \node[pcnode,dashed,fill=white,text width=3.5cm,anchor=north,font=\scriptsize\sffamily] (fb) at (0,-3.6) {\tn{מסלול חלופי: אין אישור עד סוף שבוע \latin{2} $\Rightarrow$ קורפוס \latin{FAA} פומבי}};
+  \draw[pcflow,dashed] (d1.south) -- (fb.north);
+  \node[pcnode,fill=pcZebra,text width=3.5cm,anchor=north,font=\scriptsize\sffamily] (o3) at (-8.6,-3.6) {\tn{תוצר: היקף מאושר בכתב ופתיחת \latin{M0}}};
+  \draw[pcflow] (d3.south) -- (o3.north);
+\end{pctikz}}}
+\caption{שלוש הפעולות המיידיות לאחר אישור הדוח: בקשת נתונים והרשאות, הקמת מאגר וכונן משותף ופגישת פתיחה; מועדים לפי לוח \latin{14} השבועות (פרק~\ref{ch:plan})}\label{fig:actions}
+\end{figure}
+\begin{pcbox}[pcGood]{החלטה מוצעת}
+לאשר אב-טיפוס אקדמי מוגבל, ולא להתחייב לפריסה ארגונית לפני שיושגו מדדי הדיוק, הזמן, הבטיחות והאבטחה בפיילוט.
+עמידה ביעדי הפיילוט אינה מהווה הסמכה מקצועית של עובד ואינה מהווה אישור אבטחה או בטיחות.
+\end{pcbox}
+\pcChapterEnd{summary}

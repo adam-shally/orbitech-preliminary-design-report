@@ -1,0 +1,196 @@
+%% =====================================================================
+%%  CHAPTER 7: WORK PLAN                              (budget 4 pages)
+%%  chapters/ch7-plan.tex   (dates synchronised with OrbiTech_14Weeks_WBS_sync.xml)
+%% =====================================================================
+\pcChapter{plan}{4}{תוכנית עבודה}
+\begin{pcguide}[מה כותבים כאן]
+תוכנית העבודה מתחילה מהיום שבו התבקש הדוח ומסמנת אבני דרך עד כנס הפרויקטים. בסמסטר ב', בערך במפגש הרביעי או החמישי,
+מצפים לראות משהו ראשוני עובד (קריאת נתונים וגרפים ראשונים). בשבוע האחרון מתקיים כנס הפרויקטים, שאליו מוזמנים
+ראש המחלקה ונציגי התעשייה האווירית: כל קבוצה מציגה מצגת ומדגימה את הסימולציה. סמנו את \textbf{הנתיב הקריטי}.
+תקציב: \latin{1.2} (\latin{WBS}) + \latin{1} (\latin{RACI}) + \latin{1.8} (גאנט).
+\end{pcguide}
+התוכנית מגדירה פיילוט אקדמי של \latin{14} שבועות בסמסטר ב', שתחילתו ב-\latin{07-03-2027} (יום א', שבוע \latin{1}) וסיומו בכנס הפרויקטים
+ב-\latin{10-06-2027}, ולא פריסה ארגונית מלאה. שבוע העבודה הוא ימים א'--ה'; מועדי הסמסטר וכנס הפרויקטים יאושרו בידי
+המרצה. שני חברי הצוות הם \StudentTwo\ ו\StudentOne. אב-הטיפוס כולל ליבת \latin{RAG} ותרחיש \latin{3D} מוגבל אחד; תכנון הסצנה, פיתוחה והערכתה נכללים
+בסמסטר ואינם נדחים לשלב פריסה עתידי. גורמי התעשייה האווירית והמומחים הם בעלי סמכות האישור התוכני, וסמכותם אינה מוחלפת בסמכות של
+סטודנט. \textbf{קודי המשימות \latin{1.1}--\latin{5.2} ואבני הדרך \latin{M0}--\latin{M6} זהים בתרשים ה-\latin{WBS}, במילון החבילות, במטריצת ה-\latin{RACI},
+בציר הזמן, בגאנט ובקובץ \latin{MS Project} המעודכן.}
+
+\needspace{4\baselineskip}
+\section{פירוק עבודה (\latin{WBS})}
+העבודה מפורקת לחמש חבילות ולעשר משימות (איור~\ref{fig:wbs}); לכל חבילה תוצר מוגדר, אחראי ומשך (טבלה~\ref{tab:wbsdict}).
+בנוסף הוגדרו שני שבועות רזרבה \latin{(B1, B2)} לפני אבני הדרך המרכזיות \latin{M3} ו-\latin{M6}.
+\begin{figure}[!htbp]
+\centering
+\pcFig{wbs}{%
+\pcAutoFit{\begin{pctikz}[x=1cm,y=1cm]
+  \node[pcnodeD,text width=4cm] (top) at (0,0) {\tn{פיילוט \latin{RAG} ותרגול \latin{3D} (\latin{14} שבועות)}};
+  \foreach \i/\x/\t/\ta/\tb in {1/6.2/{\latin{WP1} אפיון, מדדי בסיס וקורפוס}/{\latin{1.1} מדדים, שאלות בסיס ומדידה ידנית}/{\latin{1.2} קורפוס, אישור שימוש ורובריקה},
+                               2/3.1/{\latin{WP2} ארכיטקטורה, קליטה ואינדוקס}/{\latin{2.1} ארכיטקטורה, הרשאות ובידוד רשת}/{\latin{2.2} פענוח, אינדוקס ואחזור},
+                               3/0/{\latin{WP3} מנוע הדרכה ותסריט \latin{3D}}/{\latin{3.1} שאלות, תסריט \latin{3D} ומחוון}/{\latin{3.2} מנוע הפקה, מסך אישור וסצנת \latin{3D}},
+                               4/-3.1/{\latin{WP4} בדיקות והשוואת \latin{2D/3D}}/{\latin{4.1} הערכת מומחה וניסוי לומדים}/{\latin{4.2} בדיקות אבטחה, תיקונים ורגרסיה},
+                               5/-6.2/{\latin{WP5} דוח, הצגה ומסירה}/{\latin{5.1} ניתוח תוצאות ודוח}/{\latin{5.2} הדגמה וכנס הפרויקטים}}{
+    \node[pcnode,text width=2.5cm] (w\i) at (\x,-1.9) {\tn{\t}};
+    \draw[pcflow,-] (top.south) |- ++(0,-0.55) -| (w\i.north);
+    \node[pcleaf,text width=2.5cm,font=\scriptsize\sffamily] (t\i a) at (\x,-3.6) {\tn{\ta}};
+    \node[pcleaf,text width=2.5cm,font=\scriptsize\sffamily] (t\i b) at (\x,-4.9) {\tn{\tb}};
+    \draw[pcflow,-] (w\i.south) -- (t\i a.north);
+    \draw[pcflow,-] (t\i a.south) -- (t\i b.north);
+  }
+\end{pctikz}}}
+\caption{פירוק העבודה (\latin{WBS}) לחמש חבילות עבודה ולעשר משימות}\label{fig:wbs}
+\end{figure}
+
+\begin{table}[!htbp]
+\centering
+\caption{מילון חבילות העבודה: תוצר, אחראי ומשך}\label{tab:wbsdict}
+\begin{pctable}{c,H{0.28},H{0.32},C{0.15},C{0.10}}
+  \pchead{קוד & חבילת עבודה (משימות) & תוצר מוגדר ואבן דרך & מבצע & שבועות}
+  \pcrow{\latin{WP1} & אפיון, מדדי בסיס וקורפוס פומבי (\latin{1.1}, \latin{1.2}) & קורפוס \latin{FAA}, שאלות אמת, רובריקה ומדידת בסיס ידנית (\latin{M1}) & \StudentTwo & \rng{1}{4}}
+  \pcrow{\latin{WP2} & ארכיטקטורה מקומית, קליטה ואינדוקס (\latin{2.1}, \latin{2.2}) & תהליך מקומי ללא רשת יוצאת ואחזור ראשון (\latin{M2}) & \StudentOne & \rng{1}{5}}
+  \pcrow{\latin{WP3} & מנוע הדרכה, שאלות ותסריט \latin{3D} (\latin{3.1}, \latin{3.2}, רזרבה \latin{B1}) & אב-טיפוס ראשון: אחזור, הפקה, אישור ותצוגת \latin{3D} (\latin{M3}) & \StudentTwo\ ו\StudentOne & \rng{5}{9}}
+  \pcrow{\latin{WP4} & בדיקות \latin{RAG}, תרגול \latin{3D} והשוואת \latin{2D} (\latin{4.1}, \latin{4.2}) & ניסוי השוואתי ובדיקות אבטחה ודליפה (\latin{M4}, \latin{M5}) & \StudentTwo\ ו\StudentOne & \rng{10}{12}}
+  \pcrow{\latin{WP5} & דוח, הצגה ומסירה (\latin{5.1}, רזרבה \latin{B2}, \latin{5.2}) & דוח, מבחן והדגמת תרחיש \latin{3D} בכנס (\latin{M6}) & \StudentTwo & \rng{12}{14}}
+\end{pctable}
+\end{table}
+
+\needspace{4\baselineskip}
+\section{מטריצת אחריות (\latin{RACI})}
+\latin{R} מבצע; \latin{A} האחראי הסופי; \latin{C} מי שמתייעצים עמו; \latin{I} מי שמדווחים לו. לפי מדריך הדוח המכין, בכל שורה בטבלה~\ref{tab:raci}
+מופיע \latin{A} אחד בלבד, והוא המנחה האקדמי, ד"ר יורם סגל: הוא האחראי הסופי לאישור כל תוצר מול הקורס. הסטודנטים הם המבצעים
+\latin{(R)}. אישורי תוכן ארגוניים (נתונים, סיווג, מקורות) ניתנים בידי בעלי תפקיד מורשים ב-\latin{IAI} בתפקיד \latin{C}, ולא בידי חברי הקבוצה.
+\begin{table}[!htbp]
+\centering
+\caption{מטריצת \latin{RACI} ברמת משימה (קודים זהים ל-\latin{WBS} ולגאנט): בכל שורה \latin{A} אחד --- המנחה האקדמי}\label{tab:raci}
+\begin{pctable}{c,H{0.29},C{0.11},C{0.11},C{0.13},C{0.10},C{0.10}}
+  \pchead{משימה & תיאור & \StudentOne & \StudentTwo & ד"ר סגל (מנחה) & איש קשר \latin{IAI} & מומחה}
+  \pcrow{\latin{1.1} & מדדים, שאלות בסיס ומדידה ידנית & \latin{C} & \latin{R} & \latin{A} & \latin{I} & ---}
+  \pcrow{\latin{1.2} & קורפוס, אישור שימוש ורובריקה & \latin{C} & \latin{R} & \latin{A} & \latin{C} & ---}
+  \pcrow{\latin{2.1} & ארכיטקטורה, הרשאות ובידוד רשת & \latin{R} & \latin{C} & \latin{A} & \latin{C} & ---}
+  \pcrow{\latin{2.2} & פענוח, אינדוקס ואחזור & \latin{R} & \latin{I} & \latin{A} & \latin{I} & ---}
+  \pcrow{\latin{3.1} & שאלות, תסריט \latin{3D} ומחוון & \latin{C} & \latin{R} & \latin{A} & \latin{I} & \latin{C}}
+  \pcrow{\latin{3.2} & מנוע הפקה, מסך אישור וסצנת \latin{3D} & \latin{R} & \latin{C} & \latin{A} & \latin{I} & ---}
+  \pcrow{\latin{4.1} & הערכת מומחה וניסוי לומדים \latin{2D/3D} & \latin{C} & \latin{R} & \latin{A} & \latin{I} & \latin{C}}
+  \pcrow{\latin{4.2} & בדיקות אבטחה ודליפה, תיקונים ורגרסיה & \latin{R} & \latin{C} & \latin{A} & \latin{C} & ---}
+  \pcrow{\latin{5.1} & ניתוח תוצאות ודוח & \latin{C} & \latin{R} & \latin{A} & \latin{I} & ---}
+  \pcrow{\latin{5.2} & הדגמה וכנס הפרויקטים & \latin{R} & \latin{R} & \latin{A} & \latin{I} & ---}
+\end{pctable}
+\end{table}
+
+\needspace{4\baselineskip}
+\section{אבני דרך מהיום ועד כנס הפרויקטים}
+איור~\ref{fig:timeline} מציג את הדרך מהגשת הדוח המכין ועד כנס הפרויקטים, ובו שבע אבני הדרך \latin{M0}--\latin{M6} באותם מועדים ובאותם
+שבועות כמו בגאנט (איור~\ref{fig:gantt}) ובטבלה~\ref{tab:milestones}. התוצר הראשוני העובד --- אינדקס ואחזור על הקורפוס הפומבי, כלומר קריאת
+נתונים ותוצאות ראשונות --- מתוכנן לשבוע \latin{5} \latin{(M2)}, בהתאם לציפייה לראות תוצר ראשוני במפגש הרביעי או החמישי.
+\begin{figure}[!htbp]
+\centering
+\pcFig{timeline}{%
+\pcAutoFit{\begin{pctikz}[x=1cm,y=1cm]
+  \draw[pcflow,thick,draw=pcDark] (0.5,0) -- (-14.6,0);
+  \foreach \x/\lab/\dat/\pos in {0/הגשת הדוח המכין/\latin{25-11-2026}/above, -1.9/\latin{M0} פתיחת הפיילוט/\latin{07-03-2027} (שבוע \latin{1})/below,
+      -3.8/\latin{M1} קורפוס ושאלות אמת/\latin{01-04-2027} (שבוע \latin{4})/above, -5.7/\latin{M2} תוצר ראשוני עובד/\latin{08-04-2027} (שבוע \latin{5})/below,
+      -7.6/\latin{M3} אב-טיפוס \latin{RAG} ו-\latin{3D}/\latin{06-05-2027} (שבוע \latin{9})/above, -9.5/\latin{M4} ניסוי השוואתי/\latin{20-05-2027} (שבוע \latin{11})/below,
+      -11.4/\latin{M5} ולידציה חוזרת/\latin{27-05-2027} (שבוע \latin{12})/above, -13.3/\latin{M6} כנס הפרויקטים/\latin{10-06-2027} (שבוע \latin{14})/below}{
+    \fill[pcWarn,draw=pcDark] (\x,0) circle (0.14);
+    \node[font=\scriptsize\sffamily,text width=2.6cm,align=center,\pos=4pt] at (\x,0) {\tn{\lab}\\[1pt]\tn{\dat}};
+  }
+\end{pctikz}}}
+\caption{אבני הדרך של תוכנית העבודה, מהגשת הדוח המכין ועד כנס הפרויקטים: מועדים לפי קובץ \latin{MS Project} (תחילת סמסטר \latin{07-03-2027})}\label{fig:timeline}
+\figsrc{\latin{OrbiTech\_14Weeks\_WBS\_sync.xml}; מועדי הקורס טרם אושרו בידי המרצה.}
+\end{figure}
+\begin{table}[!htbp]
+\centering
+\caption{אבני דרך עד כנס הפרויקטים (מועדים כמו באיורים~\ref{fig:timeline} ו-\ref{fig:gantt})}\label{tab:milestones}
+\begin{pctable}{c,H{0.28},C{0.15},C{0.08},H{0.33}}
+  \pchead{קוד & אבן דרך & תאריך & שבוע & קריטריון קבלה}
+  \pcrow{\latin{M0} & פתיחת הפיילוט & \latin{07-03-2027} & \latin{1} & הגדרת היקף ומקור נתונים}
+  \pcrow{\latin{M1} & קורפוס ושאלות אמת (\latin{1.2}) & \latin{01-04-2027} & \latin{4} & מסמכי מקור, גרסאות, רובריקה ומדידת בסיס}
+  \pcrow{\latin{M2} & תוצר ראשוני עובד (\latin{2.2}) & \latin{08-04-2027} & \latin{5} & תהליך מקומי ללא רשת יוצאת; אחזור ראשון}
+  \pcrow{\latin{M3} & אב-טיפוס ראשון (אחרי \latin{B1}) & \latin{06-05-2027} & \latin{9} & אחזור, הפקה, אישור ותצוגת \latin{3D} בסיסית}
+  \pcrow{\latin{M4} & ניסוי השוואתי ראשוני (\latin{4.1}) & \latin{20-05-2027} & \latin{11} & זמן, נאמנות, דיוק חילוץ ורישום החלטות \latin{3D}}
+  \pcrow{\latin{M5} & ולידציה חוזרת (\latin{4.2}) & \latin{27-05-2027} & \latin{12} & כל דרישה נבדקה או סומנה ככשל; בדיקת דליפה}
+  \pcrow{\latin{M6} & כנס הפרויקטים ומסירה (אחרי \latin{B2}) & \latin{10-06-2027} & \latin{14} & דוח, מבחן והדגמת תרחיש \latin{3D}}
+\end{pctable}
+\end{table}
+
+\needspace{4\baselineskip}
+\section{תרשים גאנט ונתיב קריטי}
+התלויות הן מסוג \latin{FS} (סיום-להתחלה) בשתי שרשראות מקבילות. שרשרת התוכן (\StudentTwo):
+\latin{1.1} $\leftarrow$ \latin{1.2} $\leftarrow$ \latin{3.1} $\leftarrow$ \latin{B1} $\leftarrow$ \latin{4.1} $\leftarrow$
+\latin{5.1} $\leftarrow$ \latin{B2} $\leftarrow$ \latin{5.2}; שרשרת התוכנה (\StudentOne): \latin{2.1} $\leftarrow$
+\latin{2.2} $\leftarrow$ \latin{3.2} $\leftarrow$ \latin{B1} $\leftarrow$ \latin{4.2} $\leftarrow$ \latin{B2} $\leftarrow$
+\latin{5.2}. בנוסף, \latin{3.2} אינה מתחילה לפני ש-\latin{2.2} מספקת אחזור עובד, ו-\latin{4.1} דורשת את האב-טיפוס של
+\latin{M3}. אורך שתי השרשראות \latin{14} שבועות בדיוק, ולכן \textbf{שתיהן על הנתיב הקריטי} (מסגרת אדומה באיור~\ref{fig:gantt}).
+שבועות הרזרבה \latin{B1} (שבוע \latin{9}) ו-\latin{B2} (שבוע \latin{13}) הם חלק מהנתיב: הם משמשים לאינטגרציה ולתיקונים,
+ואם לא יידרשו --- יוקדם מועד האב-טיפוס או ההגשה.
+\begin{figure}[!t]
+\centering
+\pcFig{gantt}{%
+\pcAutoFit{\begin{pctikz}[x=0.55cm,y=0.5cm]
+  % week grid (week 1 at the right, time runs right-to-left)
+  \foreach \w in {0,...,14}{ \draw[pcGrey!35,thin] ({\pcGsign*\w},0.6) -- ({\pcGsign*\w},-18.6); }
+  \foreach \w in {1,...,14}{ \node[font=\scriptsize\sffamily] at ({\pcGsign*(\w-0.5)},1.1) {\w}; }
+  \node[font=\scriptsize\sffamily,anchor=west] at (0.25,1.1) {\tn{שבוע}};
+  \draw[pcDark,thick] (0,0.6) -- ({\pcGsign*14},0.6);
+  % WP1
+  \ganttsumS{1}{1}{4}{\latin{WP1} אפיון, מדדי בסיס וקורפוס}
+  \ganttbarS{2}{1}{2}{pcPrimary}{נ}{\latin{1.1} מדדים, שאלות בסיס ומדידה ידנית}
+  \ganttbarS{3}{3}{4}{pcPrimary}{נ}{\latin{1.2} קורפוס, אישור שימוש ורובריקה}
+  % WP2
+  \ganttsumS{4}{1}{5}{\latin{WP2} ארכיטקטורה, קליטה ואינדוקס}
+  \ganttbarS{5}{1}{3}{pcGood}{א}{\latin{2.1} ארכיטקטורה, הרשאות ובידוד רשת}
+  \ganttbarS{6}{4}{5}{pcGood}{א}{\latin{2.2} פענוח, אינדוקס ואחזור}
+  % WP3
+  \ganttsumS{7}{5}{9}{\latin{WP3} מנוע הדרכה ותסריט \latin{3D}}
+  \ganttbarS{8}{5}{8}{pcPrimary}{נ}{\latin{3.1} שאלות, תסריט \latin{3D} ומחוון}
+  \ganttbarS{9}{6}{8}{pcGood}{א}{\latin{3.2} מנוע הפקה, מסך אישור וסצנה}
+  \ganttbufS{10}{9}{9}{\latin{B1} רזרבה ואינטגרציה לפני \latin{M3}}
+  % WP4
+  \ganttsumS{11}{10}{12}{\latin{WP4} בדיקות והשוואת \latin{2D/3D}}
+  \ganttbarS{12}{10}{11}{pcPrimary}{נ}{\latin{4.1} הערכת מומחה וניסוי לומדים}
+  \ganttbarS{13}{10}{12}{pcGood}{א}{\latin{4.2} אבטחה ודליפה, תיקונים ורגרסיה}
+  % WP5
+  \ganttsumS{14}{12}{14}{\latin{WP5} דוח, הצגה ומסירה}
+  \ganttbarS{15}{12}{12}{pcPrimary}{נ}{\latin{5.1} ניתוח תוצאות ודוח}
+  \ganttbufS{16}{13}{13}{\latin{B2} רזרבה לפני \latin{M6}}
+  \ganttbarS{17}{14}{14}{pcPrimary}{נ}{\latin{5.2} הדגמה וכנס (שניהם)}
+  % milestones M0-M6
+  \node[anchor=west,text width=4.0cm,align=right,font=\fontsize{7}{8}\selectfont\sffamily\bfseries,inner xsep=1pt] at (0.25,-18.1) {\tn{אבני דרך \latin{M0}--\latin{M6}}};
+  \ganttmsS{1}{M0}{18.1}\ganttmsS{4}{M1}{18.1}\ganttmsS{5}{M2}{18.1}\ganttmsS{9}{M3}{18.1}
+  \ganttmsS{11}{M4}{18.1}\ganttmsS{12}{M5}{18.1}\ganttmsS{14}{M6}{18.1}
+  % legend
+  \filldraw[fill=pcPrimary,draw=pcBad,line width=0.7pt] ({\pcGsign*0.2},-19.6) rectangle ({\pcGsign*0.9},-20.2);
+  \node[font=\scriptsize\sffamily,anchor=east] at ({\pcGsign*1.1},-19.9) {\tn{\StudentTwo\ (נ)}};
+  \filldraw[fill=pcGood,draw=pcBad,line width=0.7pt] ({\pcGsign*4.0},-19.6) rectangle ({\pcGsign*4.7},-20.2);
+  \node[font=\scriptsize\sffamily,anchor=east] at ({\pcGsign*4.9},-19.9) {\tn{\StudentOne\ (א)}};
+  \filldraw[fill=pcWarn!30,draw=pcWarn!80!black,dashed] ({\pcGsign*7.6},-19.6) rectangle ({\pcGsign*8.3},-20.2);
+  \node[font=\scriptsize\sffamily,anchor=east] at ({\pcGsign*8.5},-19.9) {\tn{רזרבה}};
+  \draw[pcBad,line width=1.2pt] ({\pcGsign*10.0},-19.6) rectangle ({\pcGsign*10.7},-20.2);
+  \node[font=\scriptsize\sffamily,anchor=east] at ({\pcGsign*10.9},-19.9) {\tn{נתיב קריטי}};
+  \node[diamond,fill=pcWarn,draw=pcDark,inner sep=1.4pt] at ({\pcGsign*13.2},-19.9) {};
+  \node[font=\scriptsize\sffamily,anchor=east] at ({\pcGsign*13.5},-19.9) {\tn{אבן דרך}};
+\end{pctikz}}}
+\caption{תרשים גאנט ל-\latin{14} שבועות בסמסטר ב': חמש חבילות, עשר משימות ושני שבועות רזרבה; שתי השרשראות על הנתיב הקריטי. אבני הדרך \latin{M0}--\latin{M6} במועדים של טבלה~\ref{tab:milestones} ואיור~\ref{fig:timeline}}\label{fig:gantt}
+\figsrc{קובץ \latin{OrbiTech\_14Weeks\_WBS\_sync.xml (MS Project)} המסונכרן עם ה-\latin{WBS}; התרשים מתאר תכנון ולא ביצוע.}
+\end{figure}
+
+\textbf{ניהול שני הנתיבים הקריטיים במקביל.} כאשר אין מרווח בשתי השרשראות, עיכוב בכל אחת מהן דוחה את המסירה, ולכן ההתערבות מוגדרת מראש
+(טבלה~\ref{tab:paths}). שתי השרשראות נפגשות רק בנקודות האינטגרציה \latin{M3} ו-\latin{M6}; כדי שלא יחסמו זו את זו, הממשק ביניהן
+--- סכמת \texttt{\latin{ScenarioConfig}} (פרק~\ref{ch:alt}) --- ננעל בסוף שבוע \latin{5}, וכל שינוי בו מחייב אישור שני הצדדים.
+\begin{table}[!htbp]
+\centering
+\caption{כללי ניהול שתי השרשראות הקריטיות}\label{tab:paths}
+\begin{pctable}{H{0.22},H{0.46},H{0.32}}
+  \pchead{מנגנון & כלל פעולה & טריגר ופעולה}
+  \pcrow{נקודות סנכרון & נפגשים רק ב-\latin{M3} וב-\latin{M6}; ממשק \texttt{\latin{ScenarioConfig}} נעול בשבוע \latin{5} & שינוי בממשק: אישור שני הצדדים ועדכון המסמך}
+  \pcrow{מעקב שבועי & בכל מפגש מעודכן סיום מוקדם של כל שרשרת ב-\latin{MS Project}, ומשווים לתכנון & סטייה של יום עבודה אחד: רישום בלבד}
+  \pcrow{ניהול רזרבה (\latin{B1}, \latin{B2}) & רזרבה משותפת של \latin{5} ימי עבודה לכל אחת; ירוק: עד \latin{2} ימים; כתום: \latin{3}--\latin{4}; אדום: \latin{5} & אדום: הקפאת הרחבות \latin{3D}, שלוש נקודות החלטה בלבד}
+  \pcrow{עדיפות בקונפליקט & כששתי השרשראות דורשות את אותה רזרבה, היא ניתנת לשרשרת שעיכובה חוסם את אבן הדרך הקרובה; בשוויון --- שרשרת התוכנה & החלטה משותפת, מתועדת ביומן שינויים}
+  \pcrow{הפרדת משאבים & כל סטודנט מבצע שרשרת אחת ומתייעץ \latin{(C)} בשנייה; עבודה משותפת רק בשבועות האינטגרציה \latin{9} ו-\latin{13} & התלות ההדדית נרשמת במטריצת \latin{RACI}}
+\end{pctable}
+\end{table}
+\textbf{בקרה על שינוי:} בכל מפגש צוות \StudentTwo\ תעדכן חוסרי נתונים, תוכן ומדדים, ו\StudentOne\ יעדכן סטטוס תוכנה, תקלות
+ותלויות. שינוי משך משימה ב-\latin{MS Project} מחייב עדכון של פרק זה ושל תרשים הגאנט ואישור המנחה. אם ב-\latin{M3} לא יהיה אב-טיפוס עובד
+גם לאחר שבוע הרזרבה, יוקפאו הרחבות ה\threeD{}, ובסצנה הגנרית יישארו שלוש נקודות החלטה בלבד. בכל מקרה אין להתפשר על קישורי
+מקור, אישור מומחה, חסימת רשת יוצאת או תיעוד תוצאות.
+\pcChapterEnd{plan}
